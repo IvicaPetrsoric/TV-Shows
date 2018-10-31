@@ -14,6 +14,13 @@
 		6B59B5ED2189DE5700D9CF9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B59B5EC2189DE5700D9CF9B /* Assets.xcassets */; };
 		6B59B5F02189DE5700D9CF9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B59B5EE2189DE5700D9CF9B /* LaunchScreen.storyboard */; };
 		6B59B5FA2189E0B700D9CF9B /* UIView+Anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B59B5F92189E0B700D9CF9B /* UIView+Anchors.swift */; };
+		6B59B5FC2189E30000D9CF9B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B59B5FB2189E30000D9CF9B /* LoginViewController.swift */; };
+		6B59B602218A281A00D9CF9B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B59B601218A281A00D9CF9B /* UIColor.swift */; };
+		6B59B605218A348300D9CF9B /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B59B604218A348300D9CF9B /* CustomTextFieldView.swift */; };
+		6B59B607218A34B100D9CF9B /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B59B606218A34B100D9CF9B /* BaseView.swift */; };
+		6B59B609218A34D000D9CF9B /* SaveUserCredentialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B59B608218A34D000D9CF9B /* SaveUserCredentialView.swift */; };
+		6B59B60B218A358700D9CF9B /* TOSTER.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B59B60A218A358700D9CF9B /* TOSTER.swift */; };
+		6B59B60E218A361A00D9CF9B /* LoginViewController+TextDidChangeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B59B60D218A361A00D9CF9B /* LoginViewController+TextDidChangeDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,13 @@
 		6B59B5EF2189DE5700D9CF9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B59B5F12189DE5700D9CF9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B59B5F92189E0B700D9CF9B /* UIView+Anchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchors.swift"; sourceTree = "<group>"; };
+		6B59B5FB2189E30000D9CF9B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6B59B601218A281A00D9CF9B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		6B59B604218A348300D9CF9B /* CustomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
+		6B59B606218A34B100D9CF9B /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		6B59B608218A34D000D9CF9B /* SaveUserCredentialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserCredentialView.swift; sourceTree = "<group>"; };
+		6B59B60A218A358700D9CF9B /* TOSTER.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSTER.swift; sourceTree = "<group>"; };
+		6B59B60D218A361A00D9CF9B /* LoginViewController+TextDidChangeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+TextDidChangeDelegate.swift"; sourceTree = "<group>"; };
 		D3E3C129C6FAD8FACBFFD6E9 /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Pods/Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
 		E41EEA0EB812FD14530523D6 /* Pods_TV_Shows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TV_Shows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -73,6 +87,8 @@
 			children = (
 				6B59B5E52189DE5600D9CF9B /* AppDelegate.swift */,
 				6B59B5E72189DE5600D9CF9B /* HomeShowsViewController.swift */,
+				6B59B60A218A358700D9CF9B /* TOSTER.swift */,
+				6B59B5FD2189E30A00D9CF9B /* Login */,
 				6B59B5F82189E07400D9CF9B /* Helpers */,
 				6B59B5F72189E05600D9CF9B /* Supporting Files */,
 				6B59B5F12189DE5700D9CF9B /* Info.plist */,
@@ -94,8 +110,37 @@
 			isa = PBXGroup;
 			children = (
 				6B59B5F92189E0B700D9CF9B /* UIView+Anchors.swift */,
+				6B59B601218A281A00D9CF9B /* UIColor.swift */,
+				6B59B606218A34B100D9CF9B /* BaseView.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6B59B5FD2189E30A00D9CF9B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				6B59B603218A346500D9CF9B /* View */,
+				6B59B60C218A35F600D9CF9B /* Controller */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		6B59B603218A346500D9CF9B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6B59B604218A348300D9CF9B /* CustomTextFieldView.swift */,
+				6B59B608218A34D000D9CF9B /* SaveUserCredentialView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6B59B60C218A35F600D9CF9B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6B59B5FB2189E30000D9CF9B /* LoginViewController.swift */,
+				6B59B60D218A361A00D9CF9B /* LoginViewController+TextDidChangeDelegate.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		E0C7E51DEA1BBFE602BEC2CD /* Pods */ = {
@@ -227,9 +272,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B59B5FC2189E30000D9CF9B /* LoginViewController.swift in Sources */,
+				6B59B60B218A358700D9CF9B /* TOSTER.swift in Sources */,
 				6B59B5E82189DE5600D9CF9B /* HomeShowsViewController.swift in Sources */,
 				6B59B5FA2189E0B700D9CF9B /* UIView+Anchors.swift in Sources */,
+				6B59B60E218A361A00D9CF9B /* LoginViewController+TextDidChangeDelegate.swift in Sources */,
+				6B59B609218A34D000D9CF9B /* SaveUserCredentialView.swift in Sources */,
 				6B59B5E62189DE5600D9CF9B /* AppDelegate.swift in Sources */,
+				6B59B607218A34B100D9CF9B /* BaseView.swift in Sources */,
+				6B59B602218A281A00D9CF9B /* UIColor.swift in Sources */,
+				6B59B605218A348300D9CF9B /* CustomTextFieldView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
