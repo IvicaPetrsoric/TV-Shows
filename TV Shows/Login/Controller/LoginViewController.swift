@@ -30,6 +30,7 @@ class LoginViewController: UIViewController {
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("LOG IN", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .color(key: .buttonLogInDisabled)
         button.layer.cornerRadius = 6
         button.clipsToBounds = true
@@ -44,6 +45,7 @@ class LoginViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         
         setupViews()
+        loadCredentials()
     }
     
     fileprivate func setupViews() {
@@ -70,16 +72,33 @@ class LoginViewController: UIViewController {
     }
     
     @objc func handleLogin() {
+        saveCredentials()
+        
         print("Login")
     }
     
+    func updateLoginButtonColor() {
+        loginButton.backgroundColor = (!passwordText.isEmpty && !emailText.isEmpty) ? .color(key: .buttonLogInEnabled) : .color(key: .buttonLogInDisabled)
+    }
+    
+    fileprivate func saveCredentials() {
+        let email = saveUserCredentialView.saveCredentials ? emailText : ""
+        let password = saveUserCredentialView.saveCredentials ? passwordText : ""
+
+        UserDefaults.standard.set(email, forKey: UserDefaults.Keys.userEmail.rawValue)
+        UserDefaults.standard.set(password, forKey: UserDefaults.Keys.userPasswprd.rawValue)
+    }
+    
+    fileprivate func loadCredentials() {
+        emailText = UserDefaults.standard.string(forKey: UserDefaults.Keys.userEmail.rawValue) ?? ""
+        passwordText = UserDefaults.standard.string(forKey: UserDefaults.Keys.userPasswprd.rawValue) ?? ""
+        
+        if !emailText.isEmpty && !passwordText.isEmpty {
+            emailTextField.updateTextField(text: emailText)
+            passwordTextField.updateTextField(text: passwordText)
+        }
+        
+        updateLoginButtonColor()
+    }
+    
 }
-
-
-
-
-
-
-
-
-

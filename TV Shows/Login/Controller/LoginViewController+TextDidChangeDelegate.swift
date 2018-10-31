@@ -8,8 +8,8 @@ extension LoginViewController: TextDidChangeDelegate{
         } else {
             passwordText = text
         }
-
-        loginButton.backgroundColor = (!passwordText.isEmpty && !emailText.isEmpty) ? .color(key: .buttonLogInEnabled) : .color(key: .buttonLogInDisabled)
+        
+        updateLoginButtonColor()
     }
     
 }
