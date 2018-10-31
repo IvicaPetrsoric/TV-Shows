@@ -25,6 +25,18 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
+    let saveUserCredentialView = SaveUserCredentialView()
+    
+    let loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("LOG IN", for: .normal)
+        button.backgroundColor = .color(key: .buttonLogInDisabled)
+        button.layer.cornerRadius = 6
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +50,8 @@ class LoginViewController: UIViewController {
         view.addSubview(logoImageView)
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
+        view.addSubview(saveUserCredentialView)
+        view.addSubview(loginButton)
         
         logoImageView.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 88, left: 0, bottom: 0, right: 0), size: .init(width: 64, height: 64))
         logoImageView.anchorCenterXToSuperview()
@@ -47,6 +61,16 @@ class LoginViewController: UIViewController {
         
         passwordTextField.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 295, left: 0, bottom: 0, right: 0), size: .init(width: 375, height: 64))
         passwordTextField.anchorCenterXToSuperview()
+        
+        saveUserCredentialView.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 359, left: 0, bottom: 0, right: 0), size: .init(width: 375, height: 56))
+        saveUserCredentialView.anchorCenterXToSuperview()
+        
+        loginButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 431, left: 0, bottom: 0, right: 0), size: .init(width: 343, height: 48))
+        loginButton.anchorCenterXToSuperview()
+    }
+    
+    @objc func handleLogin() {
+        print("Login")
     }
     
 }
