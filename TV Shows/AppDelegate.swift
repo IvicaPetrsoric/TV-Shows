@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: HomeShowsViewController()) 
+        window?.rootViewController = UINavigationController(rootViewController: HomeShowsTableController()) 
         return true
     }
 
