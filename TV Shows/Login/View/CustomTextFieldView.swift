@@ -47,6 +47,16 @@ class CustomTextFieldView: BaseView {
         return view
     }()
     
+    let toolBar: UIToolbar = {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(handleDismisKeyboard))
+        doneButton.tintColor = .color(key: .buttonLogInEnabled)
+        toolBar.setItems([flexibleSpace, doneButton], animated: true)
+        return toolBar
+    }()
+    
     weak var delegate: TextDidChangeDelegate?
     
     var maximizedPlaceholderTopAnchorConstraint: NSLayoutConstraint!
@@ -72,11 +82,17 @@ class CustomTextFieldView: BaseView {
         minimizedPlaceholderTopAnchorConstraint = placeholderLabel.topAnchor.constraint(equalTo: myTextField.topAnchor, constant: 4)
         minimizedPlaceholderTopAnchorConstraint.isActive = true
         borderView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 16, left: 16, bottom: 1, right: 16), size: .init(width: 0, height: 1))
+        
+//        myTextField.inputAccessoryView = toolBar
     }
     
     func updateTextField(text: String) {
         myTextField.text = text
         movePlaceholderUp()
+    }
+    
+    @objc func handleDismisKeyboard() {
+        endEditing(true)
     }
     
     @objc func handleShowPasswrod() {

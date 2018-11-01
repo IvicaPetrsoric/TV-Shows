@@ -1,4 +1,5 @@
 import UIKit
+import Alamofire
 
 class LoginViewController: UIViewController {
     
@@ -8,8 +9,8 @@ class LoginViewController: UIViewController {
         return iv
     }()
     
-    var emailText = ""
-    var passwordText = ""
+    var userEmail = ""
+    var userPassword = ""
     
     lazy var emailTextField: CustomTextFieldView = {
         let textField = CustomTextFieldView()
@@ -34,9 +35,12 @@ class LoginViewController: UIViewController {
         button.backgroundColor = .color(key: .buttonLogInDisabled)
         button.layer.cornerRadius = 6
         button.clipsToBounds = true
+        button.isEnabled = false
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
+    
+    fileprivate let progressIndicator = PrgoressIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +58,7 @@ class LoginViewController: UIViewController {
         view.addSubview(passwordTextField)
         view.addSubview(saveUserCredentialView)
         view.addSubview(loginButton)
+        view.addSubview(progressIndicator)
         
         logoImageView.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 88, left: 0, bottom: 0, right: 0), size: .init(width: 64, height: 64))
         logoImageView.anchorCenterXToSuperview()
@@ -69,33 +74,51 @@ class LoginViewController: UIViewController {
         
         loginButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 431, left: 0, bottom: 0, right: 0), size: .init(width: 343, height: 48))
         loginButton.anchorCenterXToSuperview()
+        
+        progressIndicator.fillSuperview()
     }
     
     @objc func handleLogin() {
         saveCredentials()
+        resignFirstResponder()
+        progressIndicator.animate(show: true)
         
-        print("Login")
+        handleServiceLogIn()
+    }
+    
+    fileprivate func handleServiceLogIn() {
+        ServiceApi.shared.login(email: userEmail, password: userPassword) { (response) in
+            self.progressIndicator.animate(show: false)
+            
+            if response == .error {
+                self.showAllert(message: AlertMessage.errorLogin.rawValue)
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func updateLoginButtonColor() {
-        loginButton.backgroundColor = (!passwordText.isEmpty && !emailText.isEmpty) ? .color(key: .buttonLogInEnabled) : .color(key: .buttonLogInDisabled)
+        loginButton.backgroundColor = (!userPassword.isEmpty && !userEmail.isEmpty) ? .color(key: .buttonLogInEnabled) : .color(key: .buttonLogInDisabled)
+        loginButton.isEnabled =  (!userPassword.isEmpty && !userEmail.isEmpty) ? true : false
     }
     
     fileprivate func saveCredentials() {
-        let email = saveUserCredentialView.saveCredentials ? emailText : ""
-        let password = saveUserCredentialView.saveCredentials ? passwordText : ""
+        let email = saveUserCredentialView.saveCredentials ? userEmail : ""
+        let password = saveUserCredentialView.saveCredentials ? userPassword : ""
 
         UserDefaults.standard.set(email, forKey: UserDefaults.Keys.userEmail.rawValue)
         UserDefaults.standard.set(password, forKey: UserDefaults.Keys.userPasswprd.rawValue)
     }
     
     fileprivate func loadCredentials() {
-        emailText = UserDefaults.standard.string(forKey: UserDefaults.Keys.userEmail.rawValue) ?? ""
-        passwordText = UserDefaults.standard.string(forKey: UserDefaults.Keys.userPasswprd.rawValue) ?? ""
+        userEmail = UserDefaults.standard.string(forKey: UserDefaults.Keys.userEmail.rawValue) ?? ""
+        userPassword = UserDefaults.standard.string(forKey: UserDefaults.Keys.userPasswprd.rawValue) ?? ""
         
-        if !emailText.isEmpty && !passwordText.isEmpty {
-            emailTextField.updateTextField(text: emailText)
-            passwordTextField.updateTextField(text: passwordText)
+        if !userEmail.isEmpty && !userPassword.isEmpty {
+            emailTextField.updateTextField(text: userEmail)
+            passwordTextField.updateTextField(text: userPassword)
         }
         
         updateLoginButtonColor()

@@ -4,9 +4,9 @@ extension LoginViewController: TextDidChangeDelegate{
     
     func textDidChange(onType: CustomTextFieldView.TextFieldMode, text: String) {
         if onType == .email {
-            emailText = text
+            userEmail = text
         } else {
-            passwordText = text
+            userPassword = text
         }
         
         updateLoginButtonColor()
