@@ -26,13 +26,17 @@ class SaveUserCredentialView: BaseView {
         rememberMeLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 17, left: 56, bottom: 0, right: 0), size: .init(width: 0, height: 22))
     }
     
-    func shouldSaveCredentials() -> Bool {
-        return saveCredentials
+    func savedCredentials() {
+        saveCredentials = true
+        updateBackgroundImage()
     }
     
     @objc func handleSaveCredentials() {
         saveCredentials = !saveCredentials
-        
+        updateBackgroundImage()
+    }
+    
+    fileprivate func updateBackgroundImage() {
         let imageName = saveCredentials ? "ic-checkbox-filled" : "ic-checkbox-empty"
         checkButton.setBackgroundImage(UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
     }

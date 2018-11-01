@@ -119,6 +119,7 @@ class LoginViewController: UIViewController {
         if !userEmail.isEmpty && !userPassword.isEmpty {
             emailTextField.updateTextField(text: userEmail)
             passwordTextField.updateTextField(text: userPassword)
+            saveUserCredentialView.savedCredentials()
         }
         
         updateLoginButtonColor()
