@@ -37,8 +37,7 @@ class CustomTextFieldView: BaseView {
     lazy var showPasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(named: "ic-hide-password")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressButton(sender:)))
-        button.addGestureRecognizer(longPress)
+        button.addTarget(self, action: #selector(handleShowPasswrod), for: .touchUpInside)
         return button
     }()
     
@@ -80,12 +79,10 @@ class CustomTextFieldView: BaseView {
         movePlaceholderUp()
     }
     
-    @objc func handleLongPressButton(sender: UIGestureRecognizer) {
-        if sender.state == .began {
-            myTextField.isSecureTextEntry = false
-        } else if sender.state == .ended {
-            myTextField.isSecureTextEntry = true
-        }
+    @objc func handleShowPasswrod() {
+        myTextField.isSecureTextEntry = !myTextField.isSecureTextEntry
+        let backgroundImage =  myTextField.isSecureTextEntry ?  "ic-hide-password" : "ic-characters-hide"
+        showPasswordButton.setBackgroundImage(UIImage(named: backgroundImage)?.withRenderingMode(.alwaysOriginal), for: .normal)
     }
     
     @objc func handleTextInputChange() {
