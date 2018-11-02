@@ -39,57 +39,19 @@ class ServiceApi {
         }
     }
     
+    func getShows(completionHandler: @escaping ([Shows]?, ResponseStatus) -> ()) {
+        let url = baseUrl + "shows"
+        
+        Alamofire
+            .request(url,
+                     method: .get,
+                     encoding: JSONEncoding.default,
+                     headers: headers)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<[Shows]>) in
+                guard let myShows = response.result.value else { return completionHandler(nil, .error) }
+                return completionHandler(myShows, .success)
+        }
+    }
+    
 }
-
-
-/*
- 
- 
- 
- 
- let parameters: Parameters = [
- "email": "ios.team@infinum.hr",
- "password": "infinum12"
- ]
- 
- Alamofire.request("https://api.infinum.academy/api/users/sessions",
- method: .post,
- parameters: parameters,
- encoding: JSONEncoding.default,
- headers: headers)
- .validate()
- .responseJSON { response in
- //            print("Request: \(response.request)")
- //            print("Response: \(response.response)")
- //            print("Error: \(response.error)")
- 
- switch response.result {
- case .success:
- print("Response data: ", response.data)
- break
- //                    PromptDialog.inform("Your illustration has been submitted!")
- //                    self.handleBackButton()
- case .failure(let error):
- print(error)
- 
- if let statusCode = response.response?.statusCode, statusCode == 400 {
- //                        PromptDialog.error(error)
- } else {
- //                        PromptDialog.error(error)
- }
- }
- }
- 
- 
- 
- //        Alamofire
- //            .request("https://someurl.com/login",
- //                     method: .post,
- //                     parameters: parameters,
- //                     encoding: JSONEncoding.default)
- //            .validate()
- //            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<User>) in
- //                let user = response.result.value
- //                print(user)
- //        }
- */
