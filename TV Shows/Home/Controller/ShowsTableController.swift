@@ -1,7 +1,7 @@
 import UIKit
 
 protocol PushShowDetailsDelegate: class {
-    func pushShowDetailsController(forShow: Shows)
+    func pushShowDetailsController(byId: String)
 }
 
 class ShowsTableController: UITableViewController {
@@ -34,8 +34,8 @@ class ShowsTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let show = shows[indexPath.row]
-        delegate?.pushShowDetailsController(forShow: show)
+        let showId = shows[indexPath.row].id
+        delegate?.pushShowDetailsController(byId: showId)
     }
     
 }

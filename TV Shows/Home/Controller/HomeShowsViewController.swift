@@ -19,7 +19,6 @@ class HomeShowsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .white
         
         setupViews()
@@ -28,7 +27,12 @@ class HomeShowsViewController: UIViewController {
         
         fetchData()
     }
-        
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     func setupViews() {
         view.addSubview(titleView)
         view.addSubview(showsTableController.view)
@@ -66,8 +70,10 @@ class HomeShowsViewController: UIViewController {
 
 extension HomeShowsViewController: PushShowDetailsDelegate {
     
-    func pushShowDetailsController(forShow: Shows) {
-        navigationController?.pushViewController(UIViewController(), animated: true)
+    func pushShowDetailsController(byId: String) {
+        let showsDetilasController = ShowDetailsTableController()
+        showsDetilasController.showDetialsId = byId
+        navigationController?.pushViewController(showsDetilasController, animated: true)
     }
     
 }
