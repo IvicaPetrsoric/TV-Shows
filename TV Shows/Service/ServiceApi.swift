@@ -7,7 +7,7 @@ class ServiceApi {
     
     fileprivate let authorizationHeader: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
     fileprivate lazy var headers = ["Authorization": "\(authorizationHeader)"]
-    fileprivate let baseUrl = "https://api.infinum.academy/api/"
+    fileprivate let baseUrl = "https://api.infinum.academy"
     
     enum ResponseStatus {
         case success
@@ -15,7 +15,7 @@ class ServiceApi {
     }
     
     func login(email: String, password: String, completionHandler: @escaping (ResponseStatus) -> ()) {
-        let url = baseUrl + "users/sessions"
+        let url = baseUrl + "/api/users/sessions"
         
         let parameters: Parameters = [
             "email": email,
@@ -40,7 +40,7 @@ class ServiceApi {
     }
     
     func getShows(completionHandler: @escaping ([Shows]?, ResponseStatus) -> ()) {
-        let url = baseUrl + "shows"
+        let url = baseUrl + "/api/shows"
         
         Alamofire
             .request(url,
@@ -51,6 +51,21 @@ class ServiceApi {
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<[Shows]>) in
                 guard let myShows = response.result.value else { return completionHandler(nil, .error) }
                 return completionHandler(myShows, .success)
+        }
+    }
+    
+    func getShowsImage(byUrl: String, completionHandler: @escaping (UIImage?) -> ()) {
+        let imageUrl = baseUrl + byUrl
+        Alamofire.request(imageUrl).responseData { (response) in
+            if let error = response.error {
+                print("Failed to fetch ShowsImage ", error.localizedDescription)
+                return completionHandler(nil)
+            }
+            
+            guard let imagedata = response.data else { return completionHandler(nil) }
+            
+            let image = UIImage(data: imagedata)
+            return completionHandler(image)
         }
     }
     

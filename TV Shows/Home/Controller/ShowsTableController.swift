@@ -1,8 +1,14 @@
 import UIKit
 
+protocol PushShowDetailsDelegate: class {
+    func pushShowDetailsController(forShow: Shows)
+}
+
 class ShowsTableController: UITableViewController {
     
     var shows = [Shows]()
+    weak var delegate: PushShowDetailsDelegate?
+    
     fileprivate let cellId = "celId"
     
     override func viewDidLoad() {
@@ -18,13 +24,18 @@ class ShowsTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 98
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ShowsCell
-        
+        cell.myShow = shows[indexPath.row]
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let show = shows[indexPath.row]
+        delegate?.pushShowDetailsController(forShow: show)
     }
     
 }

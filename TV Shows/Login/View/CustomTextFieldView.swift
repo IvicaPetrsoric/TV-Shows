@@ -83,7 +83,7 @@ class CustomTextFieldView: BaseView {
         minimizedPlaceholderTopAnchorConstraint.isActive = true
         borderView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 16, left: 16, bottom: 1, right: 16), size: .init(width: 0, height: 1))
         
-//        myTextField.inputAccessoryView = toolBar
+        myTextField.inputAccessoryView = toolBar
     }
     
     func updateTextField(text: String) {
