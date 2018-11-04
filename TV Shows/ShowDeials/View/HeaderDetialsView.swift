@@ -30,7 +30,7 @@ class HeaderDetialsView: BaseView {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 24)
+        label.font = UIFont.boldSystemFont(ofSize: 24)
         return label
     }()
     

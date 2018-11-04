@@ -5,6 +5,7 @@ extension UIViewController {
     enum AlertMessage: String{
         case errorLogin = "Ooops, something went wrong, check you credentials and web connection!"
         case errorFetchingShows = "Ooops, something went wrong with fetching your shows, check your web connection!"
+        case errorFetchingShowsDetials = "Ooops, something went wrong with fetching your show details, check your web connection!"
     }
     
     func showAllert(message: String){

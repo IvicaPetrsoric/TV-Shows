@@ -1,7 +1,7 @@
 import Foundation
 import CodableAlamofire
 
-class EpisodesDetaills: Decodable {
+class ShowEpisodesDetaills: Decodable {
     
     let id: String
     let title: String

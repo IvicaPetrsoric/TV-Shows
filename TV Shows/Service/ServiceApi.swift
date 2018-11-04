@@ -85,4 +85,19 @@ class ServiceApi {
         }
     }
     
+    func getShowEpisodesDescription(id: String, completionHandler: @escaping ([ShowEpisodesDetaills]?, ResponseStatus) -> ()) {
+        let url = baseUrl + "/api/shows/\(id)/episodes"
+        
+        Alamofire
+            .request(url,
+                     method: .get,
+                     encoding: JSONEncoding.default,
+                     headers: headers)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<[ShowEpisodesDetaills]>) in
+                guard let showEpisodesDetials = response.result.value else { return completionHandler(nil, .error) }
+                return completionHandler(showEpisodesDetials, .success)
+        }
+    }
+    
 }

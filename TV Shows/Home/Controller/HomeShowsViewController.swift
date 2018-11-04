@@ -56,8 +56,12 @@ class HomeShowsViewController: UIViewController {
             }
             
             if let myShows = shows {
+                let filtered = myShows.filter({ (show) -> Bool in
+                    return !show.imageUrl.isEmpty && !show.id.isEmpty && !show.title.isEmpty
+                })
+                
                 self.showsTableController.tableView.isHidden = false
-                self.showsTableController.shows = myShows
+                self.showsTableController.shows = filtered
                 
                 DispatchQueue.main.async {
                     self.showsTableController.tableView.reloadData()
