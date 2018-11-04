@@ -56,6 +56,7 @@ class ServiceApi {
     
     func getShowsImage(byUrl: String, completionHandler: @escaping (UIImage?) -> ()) {
         let imageUrl = baseUrl + byUrl
+        
         Alamofire.request(imageUrl).responseData { (response) in
             if let error = response.error {
                 print("Failed to fetch ShowsImage ", error.localizedDescription)
@@ -66,6 +67,21 @@ class ServiceApi {
             
             let image = UIImage(data: imagedata)
             return completionHandler(image)
+        }
+    }
+    
+    func getShowDescription(id: String, completionHandler: @escaping (ShowDetails?, ResponseStatus) -> ()) {
+        let url = baseUrl + "/api/shows/\(id)"
+        
+        Alamofire
+            .request(url,
+                     method: .get,
+                     encoding: JSONEncoding.default,
+                     headers: headers)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<ShowDetails>) in
+                guard let showDetials = response.result.value else { return completionHandler(nil, .error) }
+                return completionHandler(showDetials, .success)
         }
     }
     

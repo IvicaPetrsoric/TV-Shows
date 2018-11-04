@@ -1,18 +1,21 @@
 import Foundation
 import CodableAlamofire
 
-struct Shows: Decodable {
+class EpisodesDetaills: Decodable {
     
     let id: String
     let title: String
+    let description: String
     let imageUrl: String
-    let likesCount: Int
+    let episodeNumber: String
+    let season: String
     
     private enum CodingKeys: String, CodingKey {
         case id = "_id"
         case title
+        case description
         case imageUrl
-        case likesCount
+        case episodeNumber
+        case season
     }
 }
-
