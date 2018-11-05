@@ -21,14 +21,11 @@ class UploadImageView: BaseView {
     
     lazy var addImageButton: UIButton = {
         let button = UIButton(type: .system)
-//        button.setImage(#imageLiteral(resourceName: "img-login-logo"), for: .normal)
-//        button.setBackgroundImage(UIImage(cgImage: #imageLiteral(resourceName: "ic-characters-hide").cgImage!), for: .normal)
         button.backgroundColor = .white
         button.addTarget(self, action: #selector(handleUploadImage), for: .touchUpInside)
         button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
-    
     
     override func setupViews() {
         addSubview(cameraButton)

@@ -2,6 +2,8 @@ import UIKit
 
 class CreateEpisodeController: UIViewController {
     
+    var showId = ""
+    
     fileprivate lazy var uploadImageView: UploadImageView = {
         let uploadView = UploadImageView()
         uploadView.currentVC = self
@@ -99,7 +101,13 @@ class CreateEpisodeController: UIViewController {
     }
     
     @objc func handleAddEpisode() {
-        print("Add episode")
+        guard let image = uploadImageView.addImageButton.image(for: .normal) else {
+            print("No image")
+            return
+        }
+        
+        guard let imageData = image.jpegData(compressionQuality: 0.7) else { return }
+        ServiceApi.shared.uploadImage(data: imageData, name: "test")
     }
     
 }
