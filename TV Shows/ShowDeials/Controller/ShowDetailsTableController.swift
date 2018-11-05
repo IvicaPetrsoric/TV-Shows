@@ -60,7 +60,12 @@ class ShowDetailsTableController: UIViewController {
         return headerController
     }()
     
-    fileprivate let showDetialsEpisodesTableController = ShowDetialsEpisodesTableController()
+    fileprivate lazy var showDetialsEpisodesTableController: ShowDetialsEpisodesTableController = {
+        let controller = ShowDetialsEpisodesTableController()
+        controller.delegate = self
+        return controller
+    }()
+    
     fileprivate let progressIndicator = PrgoressIndicator()
     
     override func viewDidLoad() {
@@ -106,4 +111,14 @@ extension ShowDetailsTableController: HeaderDetialsViewDelegate {
         addEpisodeButton.anchor(top: showDetialsEpisodesTableController.view.bottomAnchor, leading: nil, bottom: nil, trailing: showDetialsEpisodesTableController.view.trailingAnchor,
                                 padding: .init(top: 0, left: 0, bottom: 0, right: 24), size: .init(width: 56, height: 56))
     }
+}
+
+extension ShowDetailsTableController: PushNewVCDelegate {
+    func pushVC(byId: String) {
+        let episodeDetailsViewController = EpisodeDetailsViewController()
+        episodeDetailsViewController.episodeId = byId
+        navigationController?.pushViewController(episodeDetailsViewController, animated: true)
+    }
+    
+    
 }

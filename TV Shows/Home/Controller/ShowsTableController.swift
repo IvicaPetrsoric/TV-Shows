@@ -1,13 +1,13 @@
 import UIKit
 
-protocol PushShowDetailsDelegate: class {
-    func pushShowDetailsController(byId: String)
+protocol PushNewVCDelegate: class {
+    func pushVC(byId: String)
 }
 
 class ShowsTableController: UITableViewController {
     
     var shows = [Shows]()
-    weak var delegate: PushShowDetailsDelegate?
+    weak var delegate: PushNewVCDelegate?
     
     fileprivate let cellId = "celId"
     
@@ -35,7 +35,7 @@ class ShowsTableController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let showId = shows[indexPath.row].id
-        delegate?.pushShowDetailsController(byId: showId)
+        delegate?.pushVC(byId: showId)
     }
     
 }

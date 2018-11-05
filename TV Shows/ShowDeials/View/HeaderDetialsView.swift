@@ -31,6 +31,7 @@ class HeaderDetialsView: BaseView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -65,8 +66,8 @@ class HeaderDetialsView: BaseView {
         headerImageView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, size: .init(width: 0, height: height))
         gradientView.anchor(top: nil, leading: leadingAnchor, bottom: headerImageView.bottomAnchor, trailing: trailingAnchor, size: .init(width: 0, height: 84))
         titleLabel.anchor(top: headerImageView.bottomAnchor, leading: headerImageView.leadingAnchor, bottom: nil, trailing: headerImageView.trailingAnchor,
-                          padding: .init(top: 0, left: 24, bottom: 0, right: 24), size: .init(width: 0, height: 40))
-        descriptionLabel.anchor(top: titleLabel.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor)
+                          padding: .init(top: 0, left: 24, bottom: 0, right: 24), size: .init(width: 0, height: 0))
+        descriptionLabel.anchor(top: titleLabel.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0))
     }
     
     func getCropedImageAndHeight(_ image: UIImage) -> (UIImage, CGFloat) {

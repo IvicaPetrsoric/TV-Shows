@@ -30,6 +30,8 @@ class ShowDetialsEpisodesTableController: UITableViewController {
         }
     }
     
+    weak var delegate: PushNewVCDelegate?
+    
     var filteredResults = [ShowEpisodesDetaills]()
     
     fileprivate let cellId = "cellId"
@@ -75,5 +77,12 @@ class ShowDetialsEpisodesTableController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return filteredResults.count != 0 ? 56 : 0
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let showEpisodesDetails = showEpisodesDetails {
+            let id = showEpisodesDetails[indexPath.row].id
+            delegate?.pushVC(byId: id)
+        }
     }
 }

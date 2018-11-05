@@ -100,4 +100,19 @@ class ServiceApi {
         }
     }
     
+    func getEpisodeDetails(id: String, completionHandler: @escaping (EpisodeDetails?, ResponseStatus) -> ()) {
+        let url = baseUrl + "/api/episodes/\(id)"
+        
+        Alamofire
+            .request(url,
+                     method: .get,
+                     encoding: JSONEncoding.default,
+                     headers: headers)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<EpisodeDetails>) in
+                guard let episodesDetials = response.result.value else { return completionHandler(nil, .error) }
+                return completionHandler(episodesDetials, .success)
+        }
+    }
+    
 }
