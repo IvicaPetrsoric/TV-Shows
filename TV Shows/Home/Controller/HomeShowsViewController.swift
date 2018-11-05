@@ -24,6 +24,9 @@ class HomeShowsViewController: UIViewController {
         setupViews()
         
 //        titleView.handleLogout()
+        let createEpisodeController = CreateEpisodeController()
+        let navController = UINavigationController(rootViewController: createEpisodeController)
+        present(navController, animated: true, completion: nil)
         
         fetchData()
     }
@@ -75,7 +78,7 @@ class HomeShowsViewController: UIViewController {
 extension HomeShowsViewController: PushShowDetailsDelegate {
     
     func pushShowDetailsController(byId: String) {
-        let showsDetilasController = ShowDetailsTableController()
+        let showsDetilasController = ShowDetailsViewController()
         showsDetilasController.showDetialsId = byId
         navigationController?.pushViewController(showsDetilasController, animated: true)
     }

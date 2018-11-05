@@ -1,6 +1,6 @@
 import UIKit
 
-class ShowDetailsTableController: UIViewController {
+class ShowDetailsViewController: UIViewController {
     
     var showDetialsId: String? {
         didSet {
@@ -96,7 +96,7 @@ class ShowDetailsTableController: UIViewController {
 
 }
 
-extension ShowDetailsTableController: HeaderDetialsViewDelegate {
+extension ShowDetailsViewController: HeaderDetialsViewDelegate {
     
     func updateViews() {
         scrollView.addSubview(showDetialsEpisodesTableController.view)
