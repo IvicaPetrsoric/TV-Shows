@@ -21,7 +21,7 @@ class CommentInputAccessoryView: BaseView {
         return button
     }()
     
-    lazy var submitButton: UIButton = {
+    lazy var postButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Post", for: .normal)
         button.setTitleColor(.color(key: .buttonLogInEnabled), for: .normal)
@@ -55,14 +55,13 @@ class CommentInputAccessoryView: BaseView {
         addSubview(borderView)
         addSubview(leftButton)
         addSubview(commentTextField)
-        commentTextField.addSubview(submitButton)
+        commentTextField.addSubview(postButton)
 
         borderView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 1), size: .init(width: 0, height: 1))
         leftButton.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 7, left: 16, bottom: 0, right: 0), size: .init(width: 40, height: 40))
         commentTextField.anchor(top: topAnchor, leading: leftButton.trailingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 6, left: 8, bottom: 0, right: 16), size: .init(width: 0, height: 42))
-        submitButton.anchor(top: commentTextField.topAnchor, leading: nil, bottom: commentTextField.bottomAnchor, trailing: commentTextField.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 22))
+        postButton.anchor(top: commentTextField.topAnchor, leading: nil, bottom: commentTextField.bottomAnchor, trailing: commentTextField.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 22))
     }
-    
     
     @objc func handleLeftButton() {
         print("handle left button")
