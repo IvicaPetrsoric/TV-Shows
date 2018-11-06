@@ -115,4 +115,18 @@ class ServiceApi {
         }
     }
     
+    func getEpisodeDetailsComments(id: String, completionHandler: @escaping ([EpisodeComments]?, ResponseStatus) -> ()) {
+        let url = baseUrl + "/api/episodes/\(id)/comments"
+        
+        Alamofire
+            .request(url,
+                     method: .get,
+                     encoding: JSONEncoding.default,
+                     headers: headers)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<[EpisodeComments]>) in
+                guard let episodeComments = response.result.value else { return completionHandler(nil, .error) }
+                return completionHandler(episodeComments, .success)
+        }
+    }
 }
