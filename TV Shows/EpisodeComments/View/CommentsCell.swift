@@ -34,7 +34,7 @@ class CommentsCell: BaseCell {
     
     var commentTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test"
+        textView.text = "Test"
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.isUserInteractionEnabled = false
         textView.textContainer.lineFragmentPadding = 0

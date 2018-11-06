@@ -7,10 +7,10 @@ class EpisodeDetailsView: HeaderDetialsView {
             
             guard let season = episodeDetials?.season, let episode = episodeDetials?.episodeNumber, let title = episodeDetials?.title else { return }
             let attributedText = NSMutableAttributedString(string: "\(title)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24)])
-            attributedText.append(NSAttributedString(string: "S\(season) Ep\(episode)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.color(key: .buttonLogInEnabled)]))
+            attributedText.append(NSAttributedString(string: "S\(season) Ep\(episode)",
+                attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.color(key: .buttonLogInEnabled)]))
             titleLabel.attributedText = attributedText
             
-//            titleLabel.text = episodeDetials?.title
             descriptionLabel.text = episodeDetials?.description
             
             guard let imageUrl = episodeDetials?.imageUrl else { return }

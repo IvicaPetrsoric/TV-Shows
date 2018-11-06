@@ -32,6 +32,11 @@ class EpisodeCommentsCollectionView: UICollectionViewController, UICollectionVie
         episodeId = "0KAjbPLJuRh75OJE"
         
         collectionView.backgroundColor = .white
+        collectionView?.keyboardDismissMode = .interactive
+        
+        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -54, right: 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -54, right: 0)
+
         collectionView.register(CommentsCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(CommentsFooterCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerCellId)
         
@@ -42,6 +47,23 @@ class EpisodeCommentsCollectionView: UICollectionViewController, UICollectionVie
     @objc func handleDismiss() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    override var canBecomeFirstResponder: Bool{
+        return true
+    }
+    
+    override var inputAccessoryView: UIView?{
+        get{
+            return containerView
+        }
+    }
+    
+    lazy var containerView: CommentInputAccessoryView = {
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 54)
+        let comentInputAccessoryView = CommentInputAccessoryView(frame: frame)
+        comentInputAccessoryView.delegate = self
+        return comentInputAccessoryView
+    }()
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return episodeComments.count
@@ -78,4 +100,12 @@ class EpisodeCommentsCollectionView: UICollectionViewController, UICollectionVie
         return episodeComments.count == 0 ?  CGSize(width: view.frame.width, height: view.frame.height) : .zero
     }
     
+}
+
+extension EpisodeCommentsCollectionView: CommentInputAccessoryViewDelegate {
+    
+    func didSubmit(for comment: String) {
+        print("Text: ", comment)
+        self.containerView.clearCommentTextField()
+    }
 }
