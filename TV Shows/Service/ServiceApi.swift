@@ -28,7 +28,13 @@ class ServiceApi {
     //    email: ios.team@infinum.hr
     //    password: infinum1
     
-    let sessionManager = SessionManager()
+//    let sessionManager = SessionManager()
+    
+    var sessionManager: SessionManager {
+        let manager = Alamofire.SessionManager.default
+        manager.session.configuration.timeoutIntervalForRequest = 10
+        return manager
+    }
     
     func login(email: String, password: String, completionHandler: @escaping (ResponseStatus) -> ()) {
         var url = baseUrl + "/api/users"
@@ -74,6 +80,7 @@ class ServiceApi {
                 print("myToken \(myToken)")
                 
                 self.sessionManager.adapter = AccessTokenAdapter(accessToken: self.token)
+                
                 
                 //                let sessionManager = SessionManager()
                 //                sessionManager.adapter = AccessTokenAdapter(accessToken: self.token)
@@ -149,7 +156,9 @@ class ServiceApi {
     
     func getEpisodeDetails(id: String, completionHandler: @escaping (EpisodeDetails?, ResponseStatus) -> ()) {
         let url = baseUrl + "/api/episodes/\(id)"
-        
+//        self.sessionManager.session.configuration.timeoutIntervalForRequest = 10
+        self.sessionManager.session.configuration.timeoutIntervalForResource = 5
+
         sessionManager.request(url,
                                method: .get,
                                encoding: JSONEncoding.default)

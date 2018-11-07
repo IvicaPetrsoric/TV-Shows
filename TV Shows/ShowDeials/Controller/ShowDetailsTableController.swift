@@ -54,8 +54,8 @@ class ShowDetailsTableController: UIViewController {
         return button
     }()
     
-    fileprivate lazy var headerDetialsView: HeaderDetialsView = {
-        let headerController = HeaderDetialsView()
+    fileprivate lazy var headerDetialsView: ShowHeaderDetialsView = {
+        let headerController = ShowHeaderDetialsView()
         headerController.delegate = self
         return headerController
     }()
@@ -101,7 +101,7 @@ class ShowDetailsTableController: UIViewController {
 
 }
 
-extension ShowDetailsTableController: HeaderDetialsViewDelegate {
+extension ShowDetailsTableController: UpdateViewsDelegate {
     
     func updateViews() {
         scrollView.addSubview(showDetialsEpisodesTableController.view)

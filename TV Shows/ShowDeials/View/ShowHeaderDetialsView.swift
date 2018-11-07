@@ -1,10 +1,10 @@
 import UIKit
 
-protocol HeaderDetialsViewDelegate: class {
+protocol UpdateViewsDelegate: class {
     func updateViews()
 }
 
-class HeaderDetialsView: BaseView {
+class ShowHeaderDetialsView: BaseView {
     
     var showDetilas: ShowDetails? {
         didSet {
@@ -23,7 +23,7 @@ class HeaderDetialsView: BaseView {
         }
     }
     
-    weak var delegate: HeaderDetialsViewDelegate?
+    weak var delegate: UpdateViewsDelegate?
     
     var fetchedImage = UIImage()
     let headerImageView =  UIImageView()
@@ -58,6 +58,8 @@ class HeaderDetialsView: BaseView {
         let (cropedImage, height) = getCropedImageAndHeight(fetchedImage)
         headerImageView.image = cropedImage
         
+        let titleLabelTopPadding: CGFloat = height == 0 ? 72 : 0
+        
         addSubview(headerImageView)
         addSubview(gradientView)
         headerImageView.addSubview(titleLabel)
@@ -66,7 +68,7 @@ class HeaderDetialsView: BaseView {
         headerImageView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, size: .init(width: 0, height: height))
         gradientView.anchor(top: nil, leading: leadingAnchor, bottom: headerImageView.bottomAnchor, trailing: trailingAnchor, size: .init(width: 0, height: 84))
         titleLabel.anchor(top: headerImageView.bottomAnchor, leading: headerImageView.leadingAnchor, bottom: nil, trailing: headerImageView.trailingAnchor,
-                          padding: .init(top: 0, left: 24, bottom: 0, right: 24), size: .init(width: 0, height: 0))
+                          padding: .init(top: titleLabelTopPadding, left: 24, bottom: 0, right: 24), size: .init(width: 0, height: 0))
         descriptionLabel.anchor(top: titleLabel.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0))
     }
     

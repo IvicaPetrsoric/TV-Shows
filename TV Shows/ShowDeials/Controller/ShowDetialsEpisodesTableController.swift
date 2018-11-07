@@ -11,6 +11,11 @@ class ShowDetialsEpisodesTableController: UITableViewController {
                 return !episodeDetails.episodeNumber.isEmpty && Int(episodeDetails.episodeNumber) != nil && !episodeDetails.imageUrl.isEmpty && !episodeDetails.title.isEmpty
             })
             
+            filtered.forEach({ (episode) in
+                print(episode.imageUrl)
+            })
+            //                    print(showEpisodes)
+            
             filteredResults = filtered.sorted(by: { (a, b) -> Bool in
                 guard let aSeason = Int(a.season) else { return false }
                 guard let bSeason = Int(b.season) else { return false }
@@ -41,7 +46,7 @@ class ShowDetialsEpisodesTableController: UITableViewController {
         
         tableView.bounces = false
         tableView.separatorStyle = .none
-        tableView.register(EpisodeDetialsCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(ShowEpisodeDetialsCell.self, forCellReuseIdentifier: cellId)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -70,7 +75,7 @@ class ShowDetialsEpisodesTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! EpisodeDetialsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ShowEpisodeDetialsCell
         cell.showEpisodeDetails = filteredResults[indexPath.row]
         return cell
     }

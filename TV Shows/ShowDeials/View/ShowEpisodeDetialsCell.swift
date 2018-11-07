@@ -1,6 +1,6 @@
 import UIKit
 
-class EpisodeDetialsCell: BaseTableCell {
+class ShowEpisodeDetialsCell: BaseTableCell {
     
     var showEpisodeDetails: ShowEpisodesDetaills? {
         didSet {
