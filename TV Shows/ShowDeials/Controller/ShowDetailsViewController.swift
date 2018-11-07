@@ -101,7 +101,7 @@ class ShowDetailsViewController: UIViewController {
 
 }
 
-extension ShowDetailsTableController: UpdateViewsDelegate {
+extension ShowDetailsViewController: UpdateViewsDelegate {
     
     func updateViews() {
         scrollView.addSubview(showDetialsEpisodesTableController.view)
@@ -113,7 +113,7 @@ extension ShowDetailsTableController: UpdateViewsDelegate {
     }
 }
 
-extension ShowDetailsTableController: PushNewVCDelegate {
+extension ShowDetailsViewController: PushNewVCDelegate {
     func pushVC(byId: String) {
         let episodeDetailsViewController = EpisodeDetailsViewController()
         episodeDetailsViewController.episodeId = byId
