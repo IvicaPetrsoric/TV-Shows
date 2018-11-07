@@ -75,7 +75,7 @@ class HomeShowsViewController: UIViewController {
 extension HomeShowsViewController: PushNewVCDelegate {
     
     func pushVC(byId: String) {
-        let showsDetilasController = ShowDetailsTableController()
+        let showsDetilasController = ShowDetailsViewController()
         showsDetilasController.showDetialsId = byId
         navigationController?.pushViewController(showsDetilasController, animated: true)
     }

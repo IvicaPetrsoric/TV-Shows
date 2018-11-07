@@ -1,6 +1,6 @@
 import UIKit
 
-class ShowDetailsTableController: UIViewController {
+class ShowDetailsViewController: UIViewController {
     
     var showDetialsId: String? {
         didSet {
