@@ -23,7 +23,7 @@ class HomeShowsViewController: UIViewController {
         
         setupViews()
         
-//        titleView.handleLogout()
+        titleView.handleLogout()
         
         fetchData()
     }
@@ -31,11 +31,6 @@ class HomeShowsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-        
-        let layout = UICollectionViewFlowLayout()
-        let episodeCommentsViewController = EpisodeCommentsCollectionView(collectionViewLayout: layout)
-        let navVC = UINavigationController(rootViewController: episodeCommentsViewController)
-        navigationController?.present(navVC, animated: true, completion: nil)
     }
     
     func setupViews() {

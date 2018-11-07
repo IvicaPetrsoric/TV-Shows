@@ -56,7 +56,7 @@ extension EpisodeDetailsViewController: PushNewVCDelegate {
     
     func pushVC(byId: String) {
         let layout = UICollectionViewFlowLayout()
-        let episodeCommentsViewController = EpisodeCommentsCollectionView(collectionViewLayout: layout)
+        let episodeCommentsViewController = CommentsController(collectionViewLayout: layout)
         episodeCommentsViewController.episodeId = byId
         let navVC = UINavigationController(rootViewController: episodeCommentsViewController)
         navigationController?.present(navVC, animated: true, completion: nil)

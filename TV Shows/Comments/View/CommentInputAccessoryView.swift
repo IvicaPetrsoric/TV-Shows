@@ -40,6 +40,7 @@ class CommentInputAccessoryView: BaseView {
         textField.leftViewMode = .always
         textField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 46, height: 1))
         textField.rightViewMode = .always
+        textField.returnKeyType = .done
         return textField
     }()
     
@@ -68,7 +69,7 @@ class CommentInputAccessoryView: BaseView {
     }
     
     @objc func handlePost(){
-        guard let commentText = commentTextField.text else { return }
+        guard let commentText = commentTextField.text, !commentText.isEmpty else { return }
         delegate?.didSubmit(for: commentText)
     }
     
