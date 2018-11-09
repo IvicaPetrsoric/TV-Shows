@@ -1,7 +1,7 @@
 import Foundation
 import CodableAlamofire
 
-class ShowEpisodesDetaills: Decodable {
+struct ShowEpisodesDetaills: Decodable {
     
     let id: String
     let title: String
@@ -10,7 +10,7 @@ class ShowEpisodesDetaills: Decodable {
     let episodeNumber: String
     let season: String
     
-    private enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id = "_id"
         case title
         case description

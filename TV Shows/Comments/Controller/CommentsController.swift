@@ -11,7 +11,7 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
                 self?.progressIndicator.animate(show: false)
 
                 if response == .error {
-                    self?.showAllert(message: AlertMessage.errorPostingComment.rawValue)
+                    self?.showAllert(message: .errorPostingComment)
                     return
                 }
                 

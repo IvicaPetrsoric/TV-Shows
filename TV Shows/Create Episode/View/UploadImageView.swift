@@ -27,6 +27,9 @@ class UploadImageView: BaseView {
         return button
     }()
     
+    var currentImage: UIImage?
+    var currentImageUrl: String?
+    
     override func setupViews() {
         addSubview(cameraButton)
         addSubview(uploadImageLabel)
@@ -53,7 +56,6 @@ class UploadImageView: BaseView {
         let alert = UIAlertController(title: "Upload image", message: "Select option for uploading image", preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Camera", style: .default , handler:{ (UIAlertAction)in
-            print("User click Camera button")
             guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
                  self.handleSelectImageFrom(.photoLibrary)
                 return
@@ -67,54 +69,7 @@ class UploadImageView: BaseView {
         
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
         
-        currentVC?.present(alert, animated: true, completion: {
-            print("completion block")
-        })
-    }
-    
-    enum ImageSource {
-        case photoLibrary
-        case camera
-    }
-    
-    fileprivate func handleLibraryPhotos() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
-        currentVC?.present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    func handleSelectImageFrom(_ source: ImageSource){
-        let imagePicker =  UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-
-        switch source {
-        case .camera:
-            imagePicker.sourceType = .camera
-        case .photoLibrary:
-            imagePicker.sourceType = .photoLibrary
-        }
-        currentVC?.present(imagePicker, animated: true, completion: nil)
-    }
-    
-}
-
-extension UploadImageView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
-            addImageButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
-        } else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage{
-            addImageButton.setImage(originalImage.withRenderingMode(.alwaysOriginal), for: .normal)
-        }
-        
-        addImageButton.alpha = 1
-        cameraButton.alpha = 0
-        uploadImageLabel.alpha = 0
-        
-        roundCornerPickImage()
-        currentVC?.dismiss(animated: true, completion: nil)
+        currentVC?.present(alert, animated: true)
     }
     
 }

@@ -207,114 +207,52 @@ class ServiceApi {
         }
     }
     
-    func uploadImage(data: Data, name: String) {
-//        let imageData = UIImagePNGRepresentation(image)!
+    func postImage(data: Data, fileName: String, completionHandler: @escaping (ResponseStatus) -> ()) {
         let url = baseUrl + "/api/media"
         
-//        Alamofire.upload(data, to: url).responseJSON { response in
-//            print(response)
-//        }
-        
-//        let fileURL = URL(string:"file://"+path)
-//        
-//        let parameters: Parameters = [
-//            "email": "ios.team@infinum.hr",
-//            "password": "infinum1"
-//        ]
-//        
-//        
-//        
-//        Alamofire.upload(
-//            multipartFormData: { multipartFormData in
-//                multipartFormData.append(fileURL, withName: "file")
-//        },
-//            to: url,
-//            headers:headers,
-//            encodingCompletion: { encodingResult in
-//                switch encodingResult {
-//                case .success(let upload, _, _):
-//                    upload.validate(statusCode: 200..<300)
-//                        .responseJSON { response in
-//                            
-//                            switch response.result {
-//                            case .success:
-//                                debugPrint(response)
-//                                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-//                                    print("Data: \(utf8Text)")
-//                                    
-//                                    let dict = self.convertToDictionaryAny(text: utf8Text)
-//                                    
-//                                    let fileName = dict!["fileName"]! as! String
-//                                    print (fileName)
-//                                    
-//                                    if fileURL.pathExtension == "jpg" {
-//                                        self.thumbnailName = fileName
-//                                    }
-//                                    if fileURL.pathExtension == "json" {
-//                                        self.jsonName = fileName
-//                                    }
-//                                    
-//                                    self.callPatchIfAllDataIsReady()
-//                                }
-//                            case .failure(let error):
-//                                print(error)
-//                                
-//                                if let statusCode = response.response?.statusCode, statusCode == 400 {
-//                                    PromptDialog.error(error)
-//                                } else {
-//                                    PromptDialog.error(error)
-//                                }
-//                            }
-//                    }
-//                case .failure(let encodingError):
-//                    print(encodingError)
-//                }
-//        })
-        
-        
-//        let urlRequest = urlRequestWithComponents(url, parameters: parameters, imageData: data)
-//
-//        Alamofire.upload(urlRequest.0, urlRequest.1)
-//            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
-//                println("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
-//            }
-//            .responseJSON { (request, response, JSON, error) in
-//                println("REQUEST \(request)")
-//                println("RESPONSE \(response)")
-//                println("JSON \(JSON)")
-//                println("ERROR \(error)")
-//        }
-
-        
-//        Alamofire.upload(multipartFormData: { multipartFormData in
-//
-//            multipartFormData.append(data, withName: name, fileName: "\(name).jpg", mimeType: "image/jpg")
-//
-//            for (key, value) in parameters {
-//                multipartFormData.append((value as AnyObject).dataUsingEncoding(String.Encoding.utf8)!, withName: key)
-//
-//            }
-//
-//            }, to: url, method: .post, headers: headers,
-//                encodingCompletion: { encodingResult in
-//                    switch encodingResult {
-//                    case .success(let upload, _, _):
-//                        upload.response { [weak self] response in
-//                            guard let strongSelf = self else {
-//                                return
-//                            }
-//                            debugPrint(response)
-//                        }
-//                    case .failure(let encodingError):
-//                        print("error:\(encodingError)")
-//                    }
-//
-//        })
+        sessionManager.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(data, withName: "avatar", fileName: fileName, mimeType: "image/png")
+        }, to: url, method: .post) { (result) in
+            switch result{
+            case .success(let upload, _, _):
+                upload.responseJSON { response in
+                    completionHandler(.success)
+                }
+            case .failure(let error):
+                print("Error in upload: \(error.localizedDescription)")
+                completionHandler(.error)
+            }
+        }
     }
     
-    
-    
-    
+    func postCreateEpisode(details: ShowEpisodesDetaills, completionHandler: @escaping (ResponseStatus) -> ()) {
+        let url = baseUrl + "/api/episodes"
+        
+        let parameters: Parameters = [
+            "showId": details.id,
+            "mediaId": details.imageUrl,
+            "title": details.title,
+            "description": details.description,
+            "episodeNumber": details.episodeNumber,
+            "season": details.season
+        ]
+        
+        sessionManager.request(url,
+                               method: .post,
+                               parameters: parameters,
+                               encoding: JSONEncoding.default)
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    completionHandler(.success)
+                    
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(.error)
+                }
+        }
+    }
 }
 
 class AccessTokenAdapter: RequestAdapter {

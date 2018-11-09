@@ -91,7 +91,7 @@ class LoginViewController: UIViewController {
             self.progressIndicator.animate(show: false)
             
             if response == .error {
-                self.showAllert(message: AlertMessage.errorLogin.rawValue)
+                self.showAllert(message: .errorLogin)
                 return
             }
             

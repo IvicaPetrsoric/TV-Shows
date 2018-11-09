@@ -33,12 +33,14 @@ class PrgoressIndicator: BaseView {
     func animate(show: Bool) {
         if show {
             activityIndicator.startAnimating()
-        } else {
-            activityIndicator.stopAnimating()
         }
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.3, animations: {
             self.alpha = show ? 1 : 0
+        }) { (_) in
+            if !show {
+                self.activityIndicator.stopAnimating()
+            }
         }
     }
     

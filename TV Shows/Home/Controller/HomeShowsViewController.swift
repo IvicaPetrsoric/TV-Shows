@@ -22,9 +22,7 @@ class HomeShowsViewController: UIViewController {
         view.backgroundColor = .white
         
         setupViews()
-        
-        titleView.handleLogout()
-        
+        titleView.handleLogout()        
         fetchData()
     }
 
@@ -51,7 +49,7 @@ class HomeShowsViewController: UIViewController {
             self.progressIndicator.animate(show: false)
             
             if error == .error {
-                self.showAllert(message: AlertMessage.errorFetchingShows.rawValue)
+                self.showAllert(message: .errorFetchingShows)
                 return
             }
             

@@ -7,27 +7,17 @@ class ShowDetailsViewController: UIViewController {
             guard let id = showDetialsId else { return }
             progressIndicator.animate(show: true)
 
-            ServiceApi.shared.getShowDescription(id: id) { [weak self] (details, error) in
-                if error == .error {
-                    self?.progressIndicator.animate(show: false)
-                    self?.showAllert(message: AlertMessage.errorFetchingShowsDetials.rawValue)
+            ServiceApi.shared.getShowDescription(id: id) { [weak self] (details, response) in
+                self?.progressIndicator.animate(show: false)
+
+                if response == .error {
+                    self?.showAllert(message: .errorFetchingShowsDetials)
                     return
                 }
                 
                 guard let details = details else { return }
                 self?.headerDetialsView.showDetilas = details
-                
-                ServiceApi.shared.getShowEpisodesDescription(id: id) { [weak self] (showEpisodes, error) in
-                    self?.progressIndicator.animate(show: false)
-
-                    if error == .error {
-                        self?.showAllert(message: AlertMessage.errorFetchingShowsDetials.rawValue)
-                        return
-                    }
-                    
-                    guard let showEpisodes = showEpisodes else { return }
-                    self?.showDetialsEpisodesTableController.showEpisodesDetails = showEpisodes
-                }
+                self?.showDetialsEpisodesTableController.showId = id
             }
         }
     }
@@ -54,13 +44,13 @@ class ShowDetailsViewController: UIViewController {
         return button
     }()
     
-    fileprivate lazy var headerDetialsView: ShowHeaderDetialsView = {
+    lazy var headerDetialsView: ShowHeaderDetialsView = {
         let headerController = ShowHeaderDetialsView()
         headerController.delegate = self
         return headerController
     }()
     
-    fileprivate lazy var showDetialsEpisodesTableController: ShowDetialsEpisodesTableController = {
+    lazy var showDetialsEpisodesTableController: ShowDetialsEpisodesTableController = {
         let controller = ShowDetialsEpisodesTableController()
         controller.delegate = self
         return controller
@@ -83,8 +73,8 @@ class ShowDetailsViewController: UIViewController {
         scrollView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: -UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0))
 
 //        // headerDetails height + Episdeos: title, 7cells, addButton
-//        let height: CGFloat = headerDetialsView.frame.height + 56 + 7 * 56 + 77
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 1032)
+//        let height: CGFloat = headerDetialsView.frame.height + 56 + 7 * 56
+//        scrollView.contentSize = CGSize(width: view.frame.width, height: 1032)
         
         headerDetialsView.anchor(top: scrollView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
         backButton.anchor(top: scrollView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 28, left: 16, bottom: 0, right: 0), size: .init(width: 32, height: 32))
@@ -96,29 +86,12 @@ class ShowDetailsViewController: UIViewController {
     }
     
     @objc func handleAddEpisode() {
-        print("Add episode")
+        guard let id = showDetialsId else { return }
+        let createEpisode = CreateEpisodeController()
+        createEpisode.showId = id
+        createEpisode.delegate = self
+        let navVC = UINavigationController(rootViewController: createEpisode)
+        navigationController?.present(navVC, animated: true, completion: nil)
     }
 
-}
-
-extension ShowDetailsViewController: UpdateViewsDelegate {
-    
-    func updateViews() {
-        scrollView.addSubview(showDetialsEpisodesTableController.view)
-        scrollView.addSubview(addEpisodeButton)
-        
-        showDetialsEpisodesTableController.view.anchor(top: headerDetialsView.descriptionLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: .init(width: 0, height: 448))
-        addEpisodeButton.anchor(top: showDetialsEpisodesTableController.view.bottomAnchor, leading: nil, bottom: nil, trailing: showDetialsEpisodesTableController.view.trailingAnchor,
-                                padding: .init(top: 0, left: 0, bottom: 0, right: 24), size: .init(width: 56, height: 56))
-    }
-}
-
-extension ShowDetailsViewController: PushNewVCDelegate {
-    func pushVC(byId: String) {
-        let episodeDetailsViewController = EpisodeDetailsViewController()
-        episodeDetailsViewController.episodeId = byId
-        navigationController?.pushViewController(episodeDetailsViewController, animated: true)
-    }
-    
-    
 }

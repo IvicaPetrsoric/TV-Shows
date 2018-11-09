@@ -10,7 +10,7 @@ extension CommentsController: CommentInputAccessoryViewDelegate {
             self?.progressIndicator.animate(show: false)
             
             if response == .error {
-                self?.showAllert(message: AlertMessage.errorPostingComment.rawValue)
+                self?.showAllert(message: .errorPostingComment)
                 return
             }
             

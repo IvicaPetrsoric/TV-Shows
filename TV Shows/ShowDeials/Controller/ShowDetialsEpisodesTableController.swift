@@ -2,19 +2,32 @@ import UIKit
 
 class ShowDetialsEpisodesTableController: UITableViewController {
     
+    var showId: String? {
+        didSet {
+            guard let id = showId else { return }
+            progressIndicator.animate(show: true)
+            
+            ServiceApi.shared.getShowEpisodesDescription(id: id) { [weak self] (showEpisodes, response) in
+                self?.progressIndicator.animate(show: false)
+                
+                if response == .error {
+                    self?.showAllert(message: .errorFetchingShowsDetials)
+                    return
+                }
+                
+                guard let showEpisodes = showEpisodes else { return }
+                self?.showEpisodesDetails = showEpisodes
+            }
+        }
+    }
     
     var showEpisodesDetails: [ShowEpisodesDetaills]? {
         didSet {
             guard let showEpisodesDetails = self.showEpisodesDetails else { return }
             
             let filtered = showEpisodesDetails.filter({ (episodeDetails) -> Bool in
-                return !episodeDetails.episodeNumber.isEmpty && Int(episodeDetails.episodeNumber) != nil && !episodeDetails.imageUrl.isEmpty && !episodeDetails.title.isEmpty
+                return !episodeDetails.episodeNumber.isEmpty && Int(episodeDetails.episodeNumber) != nil && !episodeDetails.title.isEmpty
             })
-            
-            filtered.forEach({ (episode) in
-                print(episode.imageUrl)
-            })
-            //                    print(showEpisodes)
             
             filteredResults = filtered.sorted(by: { (a, b) -> Bool in
                 guard let aSeason = Int(a.season) else { return false }
@@ -41,12 +54,24 @@ class ShowDetialsEpisodesTableController: UITableViewController {
     
     fileprivate let cellId = "cellId"
     
+    fileprivate let progressIndicator = PrgoressIndicator()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTableView()
+        setupViews()
+    }
+    
+    fileprivate func setupTableView() {
         tableView.bounces = false
         tableView.separatorStyle = .none
         tableView.register(ShowEpisodeDetialsCell.self, forCellReuseIdentifier: cellId)
+    }
+    
+    fileprivate func setupViews() {
+        view.addSubview(progressIndicator)
+        progressIndicator.anchorCenterSuperview()
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
