@@ -60,20 +60,21 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButton)
         view.addSubview(progressIndicator)
         
-        logoImageView.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 88, left: 0, bottom: 0, right: 0), size: .init(width: 64, height: 64))
+        logoImageView.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil,
+                             padding: .init(top: 88, left: 0, bottom: 0, right: 0), size: .init(width: 64, height: 64))
         logoImageView.anchorCenterXToSuperview()
         
-        emailTextField.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 215, left: 0, bottom: 0, right: 0), size: .init(width: 375, height: 64))
-        emailTextField.anchorCenterXToSuperview()
+        emailTextField.anchor(top: logoImageView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,
+                              padding: .init(top: 47, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 64))
         
-        passwordTextField.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 295, left: 0, bottom: 0, right: 0), size: .init(width: 375, height: 64))
-        passwordTextField.anchorCenterXToSuperview()
+        passwordTextField.anchor(top: emailTextField.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,
+                                 padding: .init(top: 16, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 64))
         
-        saveUserCredentialView.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 359, left: 0, bottom: 0, right: 0), size: .init(width: 375, height: 56))
-        saveUserCredentialView.anchorCenterXToSuperview()
+        saveUserCredentialView.anchor(top: passwordTextField.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,
+                                      padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 56))
         
-        loginButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 431, left: 0, bottom: 0, right: 0), size: .init(width: 343, height: 48))
-        loginButton.anchorCenterXToSuperview()
+        loginButton.anchor(top: saveUserCredentialView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,
+                           padding: .init(top: 16, left: 16, bottom: 0, right: 16), size: .init(width: 0, height: 48))
         
         progressIndicator.fillSuperview()
     }

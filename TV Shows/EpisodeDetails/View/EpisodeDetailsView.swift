@@ -32,7 +32,7 @@ class EpisodeDetailsView: ShowHeaderDetialsView {
     
     lazy var commentButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "ic-characters-hide")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(UIImage(named: "ic-message-circle")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.setTitle("Comments", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.centerTextAndImage(spacing: 8)

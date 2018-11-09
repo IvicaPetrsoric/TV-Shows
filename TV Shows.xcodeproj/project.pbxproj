@@ -56,6 +56,7 @@
 		6B5C17FF21950DCE00B5F880 /* CreateEpisodeController+TextDidChangeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C17FE21950DCE00B5F880 /* CreateEpisodeController+TextDidChangeDelegate.swift */; };
 		6B5C180121950E6F00B5F880 /* UploadImageView+ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C180021950E6F00B5F880 /* UploadImageView+ImagePicker.swift */; };
 		6B5C18052195116000B5F880 /* ShowDetailsViewController+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C18042195116000B5F880 /* ShowDetailsViewController+Delegates.swift */; };
+		6B5C1807219517B000B5F880 /* HomeShowsViewController+PushNewVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C1806219517B000B5F880 /* HomeShowsViewController+PushNewVCDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +111,7 @@
 		6B5C17FE21950DCE00B5F880 /* CreateEpisodeController+TextDidChangeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreateEpisodeController+TextDidChangeDelegate.swift"; sourceTree = "<group>"; };
 		6B5C180021950E6F00B5F880 /* UploadImageView+ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadImageView+ImagePicker.swift"; sourceTree = "<group>"; };
 		6B5C18042195116000B5F880 /* ShowDetailsViewController+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowDetailsViewController+Delegates.swift"; sourceTree = "<group>"; };
+		6B5C1806219517B000B5F880 /* HomeShowsViewController+PushNewVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeShowsViewController+PushNewVCDelegate.swift"; sourceTree = "<group>"; };
 		D3E3C129C6FAD8FACBFFD6E9 /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Pods/Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
 		E41EEA0EB812FD14530523D6 /* Pods_TV_Shows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TV_Shows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -302,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				6B59B628218BB78C00D9CF9B /* HomeShowsViewController.swift */,
+				6B5C1806219517B000B5F880 /* HomeShowsViewController+PushNewVCDelegate.swift */,
 				6B59B62A218BB8BF00D9CF9B /* ShowsTableController.swift */,
 			);
 			path = Controller;
@@ -574,6 +577,7 @@
 				6B59B620218B9FD200D9CF9B /* UIViewController+AlertControllers.swift in Sources */,
 				6B3AAB26218F10370018B9E4 /* ShowHeaderDetialsView.swift in Sources */,
 				6B5C17A72190D45100B5F880 /* EpisodeDetailsView.swift in Sources */,
+				6B5C1807219517B000B5F880 /* HomeShowsViewController+PushNewVCDelegate.swift in Sources */,
 				6B5C179F2190CF8E00B5F880 /* EpisodeDetailsViewController.swift in Sources */,
 				6B5C17DE21937BE600B5F880 /* CommentsController+CollectionView.swift in Sources */,
 				6B3AAB38218FA2930018B9E4 /* UploadImageView.swift in Sources */,
