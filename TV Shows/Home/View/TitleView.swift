@@ -1,6 +1,12 @@
 import UIKit
 
+protocol PresentNewVCDelegate: class {
+    func presentVC(byId: String)
+}
+
 class TitleView: BaseView {
+    
+    weak var delegate: PresentNewVCDelegate?
     
     fileprivate let logutButton: UIButton = {
         let button = UIButton(type: .system)
@@ -15,9 +21,7 @@ class TitleView: BaseView {
         label.textAlignment = .right
         return label
     }()
-    
-    weak var viewControoler: UIViewController? = nil
-    
+        
     override func setupViews() {
         addSubview(logutButton)
         addSubview(titleLabel)
@@ -27,11 +31,7 @@ class TitleView: BaseView {
     }
     
     @objc func handleLogout() {
-        let loginViewController = LoginViewController()
-        let navController = UINavigationController(rootViewController: loginViewController)
-        if let vc = viewControoler {
-            vc.present(navController, animated: true, completion: nil)
-        }
+        delegate?.presentVC(byId: "")
     }
     
 }

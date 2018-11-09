@@ -4,7 +4,7 @@ class HomeShowsViewController: UIViewController {
     
     lazy var titleView: TitleView = {
         let view = TitleView()
-        view.viewControoler = self
+        view.delegate = self
         return view
     }()
     
@@ -21,9 +21,8 @@ class HomeShowsViewController: UIViewController {
         
         view.backgroundColor = .white
         
+        presentVC(byId: "")
         setupViews()
-        titleView.handleLogout()        
-        fetchData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,7 +41,7 @@ class HomeShowsViewController: UIViewController {
         progressIndicator.fillSuperview()
     }
     
-    func fetchData() {
+    func fetchUserVideos() {
         progressIndicator.animate(show: true)
         
         ServiceApi.shared.getShows() { (shows, error) in

@@ -1,7 +1,12 @@
 import UIKit
-import Alamofire
+
+protocol LoginViewDelegate: class {
+    func userLoged()
+}
 
 class LoginViewController: UIViewController {
+    
+    weak var delegate: LoginViewDelegate?
     
     let logoImageView: UIImageView = {
         let iv = UIImageView(image: UIImage(named: "img-login-logo")?.withRenderingMode(.alwaysOriginal))
@@ -88,15 +93,16 @@ class LoginViewController: UIViewController {
     }
     
     fileprivate func handleServiceLogIn() {
-        ServiceApi.shared.login(email: userEmail, password: userPassword) { (response) in
-            self.progressIndicator.animate(show: false)
+        ServiceApi.shared.login(email: userEmail, password: userPassword) { [weak self] (response) in
+            self?.progressIndicator.animate(show: false)
             
             if response == .error {
-                self.showAllert(message: .errorLogin)
+                self?.showAllert(message: .errorLogin)
                 return
             }
             
-            self.dismiss(animated: true, completion: nil)
+            self?.delegate?.userLoged()
+            self?.dismiss(animated: true, completion: nil)
         }
     }
     

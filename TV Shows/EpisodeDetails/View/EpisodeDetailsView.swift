@@ -28,7 +28,7 @@ class EpisodeDetailsView: ShowHeaderDetialsView {
         }
     }
     
-    weak var epDelegate: PushNewVCDelegate?
+    weak var epDelegate: PresentNewVCDelegate?
     
     lazy var commentButton: UIButton = {
         let button = UIButton(type: .system)
@@ -47,7 +47,7 @@ class EpisodeDetailsView: ShowHeaderDetialsView {
     
     @objc func handleComments() {
         guard let id = episodeDetials?.id else { return }
-        epDelegate?.pushVC(byId: id)
+        epDelegate?.presentVC(byId: id)
     }
     
 }

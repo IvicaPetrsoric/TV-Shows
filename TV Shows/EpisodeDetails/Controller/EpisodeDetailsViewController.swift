@@ -66,9 +66,9 @@ extension EpisodeDetailsViewController: UpdateViewsDelegate {
     }
 }
 
-extension EpisodeDetailsViewController: PushNewVCDelegate {
+extension EpisodeDetailsViewController: PresentNewVCDelegate {
     
-    func pushVC(byId: String) {
+    func presentVC(byId: String) {
         let layout = UICollectionViewFlowLayout()
         let episodeCommentsViewController = CommentsController(collectionViewLayout: layout)
         episodeCommentsViewController.episodeId = byId
