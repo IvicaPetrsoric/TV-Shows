@@ -93,7 +93,8 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     func addNewComment(id: String, comment: String) {
-        let newComment = Comment.init(id: "", episodeId: id, text: comment, userEmail: "")
+        let userEmail = UserDefaults.standard.string(forKey: UserDefaults.Keys.userEmail.rawValue) ?? ""
+        let newComment = Comment.init(id: "", episodeId: id, text: comment, userEmail: userEmail)
         self.comments.append(newComment)
         self.reloadCollectionView()
         self.containerView.clearCommentTextField()

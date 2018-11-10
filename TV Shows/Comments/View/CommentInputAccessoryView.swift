@@ -36,6 +36,8 @@ class CommentInputAccessoryView: BaseView {
         textField.borderStyle = .roundedRect
         textField.clipsToBounds = true
         textField.layer.cornerRadius = 21
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.gray.cgColor
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 22, height: 1))
         textField.leftViewMode = .always
         textField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 46, height: 1))
