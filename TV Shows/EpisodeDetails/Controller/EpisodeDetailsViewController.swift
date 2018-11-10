@@ -42,14 +42,25 @@ class EpisodeDetailsViewController: LightStatusBarStyle {
         setupViews()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.addSubview(backButton)
+        
+        var backButtonTopPadding: CGFloat = 28
+        
+        if #available(iOS 11.0, *) {
+            backButtonTopPadding = view.safeAreaInsets.top != 0 ? view.safeAreaInsets.top + 8  : backButtonTopPadding
+        }
+        
+        backButton.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil,
+                          padding: .init(top: backButtonTopPadding, left: 16, bottom: 0, right: 0), size: .init(width: 32, height: 32))
+    }
+    
     fileprivate func setupViews() {
         view.addSubview(episodeDetailsView)
-        view.addSubview(backButton)
         view.addSubview(progressIndicator)
         
         episodeDetailsView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
-        backButton.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil,
-                          padding: .init(top: 28, left: 16, bottom: 0, right: 0), size: .init(width: 32, height: 32))
         progressIndicator.fillSuperview()
     }
     

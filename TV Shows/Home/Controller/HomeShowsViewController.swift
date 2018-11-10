@@ -33,10 +33,12 @@ class HomeShowsViewController: UIViewController {
         view.addSubview(titleView)
         view.addSubview(showsTableController.view)
         view.addSubview(progressIndicator)
-        
-        titleView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: .init(width: 0, height: 83))
+        if #available(iOS 11.0, *) {
+            titleView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: .init(width: 0, height: 83))
+        } else {
+            titleView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: .init(width: 0, height: 83))
+        }
         showsTableController.view.anchor(top: titleView.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
-        showsTableController.tableView.isHidden = true
         progressIndicator.fillSuperview()
     }
     

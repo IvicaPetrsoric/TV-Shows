@@ -63,18 +63,29 @@ class ShowDetailsViewController: LightStatusBarStyle {
         setupViews()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollView.addSubview(backButton)
+        
+        var backButtonTopPadding: CGFloat = 28
+        
+        if #available(iOS 11.0, *) {
+            backButtonTopPadding = view.safeAreaInsets.top != 0 ? view.safeAreaInsets.top + 8  : backButtonTopPadding
+        }
+        
+        backButton.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil,
+                          padding: .init(top: backButtonTopPadding, left: 16, bottom: 0, right: 0), size: .init(width: 32, height: 32))
+    }
+    
     fileprivate func setupViews() {
         view.addSubview(scrollView)
         view.addSubview(progressIndicator)
         scrollView.addSubview(headerDetialsView)
-        scrollView.addSubview(backButton)
         
         scrollView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor,
                           padding: .init(top: -UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0))
         
         headerDetialsView.anchor(top: scrollView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
-        backButton.anchor(top: scrollView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil,
-                          padding: .init(top: 28, left: 16, bottom: 0, right: 0), size: .init(width: 32, height: 32))
         progressIndicator.fillSuperview()
     }
     

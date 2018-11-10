@@ -54,16 +54,27 @@ class CommentInputAccessoryView: BaseView {
     
     override func setupViews() {
         backgroundColor = .white
-
+        
         addSubview(borderView)
         addSubview(leftButton)
         addSubview(commentTextField)
         commentTextField.addSubview(postButton)
 
-        borderView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 1), size: .init(width: 0, height: 1))
-        leftButton.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 7, left: 16, bottom: 0, right: 0), size: .init(width: 40, height: 40))
-        commentTextField.anchor(top: topAnchor, leading: leftButton.trailingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 6, left: 8, bottom: 0, right: 16), size: .init(width: 0, height: 42))
-        postButton.anchor(top: commentTextField.topAnchor, leading: nil, bottom: commentTextField.bottomAnchor, trailing: commentTextField.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 22))
+        if #available(iOS 11.0, *) {
+            commentTextField.anchor(top: nil, leading: leftButton.trailingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: trailingAnchor,
+                                    padding: .init(top: 0, left: 8, bottom: 6, right: 16), size: .init(width: 0, height: 42))
+            leftButton.anchor(top: nil, leading: leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: nil,
+                              padding: .init(top: 0, left: 16, bottom: 7, right: 0), size: .init(width: 40, height: 40))
+        } else {
+            commentTextField.anchor(top: nil, leading: leftButton.trailingAnchor, bottom: bottomAnchor, trailing: trailingAnchor,
+                                    padding: .init(top: 0, left: 8, bottom: 7, right: 16), size: .init(width: 0, height: 42))
+            leftButton.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: .init(top: 0, left: 16, bottom: 6, right: 0), size: .init(width: 40, height: 40))
+        }
+        
+        borderView.anchor(top: commentTextField.topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor,
+                          padding: .init(top: -7, left: 0, bottom: 0, right: 1), size: .init(width: 0, height: 1))
+        postButton.anchor(top: commentTextField.topAnchor, leading: nil, bottom: commentTextField.bottomAnchor, trailing: commentTextField.trailingAnchor,
+                          padding: .init(top: 0, left: 0, bottom: 0, right: 22))
     }
     
     @objc func handleLeftButton() {
