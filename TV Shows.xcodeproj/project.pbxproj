@@ -60,6 +60,8 @@
 		6B5C180B21951D5100B5F880 /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C180A21951D5100B5F880 /* UserToken.swift */; };
 		6B5C180D21951FD600B5F880 /* AccessTokenAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C180C21951FD600B5F880 /* AccessTokenAdapter.swift */; };
 		6B5C181D2197187E00B5F880 /* LightStatusBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C181C2197187E00B5F880 /* LightStatusBarStyle.swift */; };
+		6B5C181F2197202100B5F880 /* UploadImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C181E2197202100B5F880 /* UploadImageData.swift */; };
+		6B5C18222197710600B5F880 /* ShowDetialsEpisodesTableController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C18212197710500B5F880 /* ShowDetialsEpisodesTableController+TableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +120,8 @@
 		6B5C180A21951D5100B5F880 /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
 		6B5C180C21951FD600B5F880 /* AccessTokenAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenAdapter.swift; sourceTree = "<group>"; };
 		6B5C181C2197187E00B5F880 /* LightStatusBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightStatusBarStyle.swift; sourceTree = "<group>"; };
+		6B5C181E2197202100B5F880 /* UploadImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageData.swift; sourceTree = "<group>"; };
+		6B5C18212197710500B5F880 /* ShowDetialsEpisodesTableController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowDetialsEpisodesTableController+TableView.swift"; sourceTree = "<group>"; };
 		D3E3C129C6FAD8FACBFFD6E9 /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Pods/Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
 		E41EEA0EB812FD14530523D6 /* Pods_TV_Shows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TV_Shows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -157,6 +161,7 @@
 				6B3AAB1F218EFFFF0018B9E4 /* ShowDetailsViewController.swift */,
 				6B5C18042195116000B5F880 /* ShowDetailsViewController+Delegates.swift */,
 				6B3AAB1D218E065E0018B9E4 /* ShowDetialsEpisodesTableController.swift */,
+				6B5C18212197710500B5F880 /* ShowDetialsEpisodesTableController+TableView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 		6B3AAB36218FA2530018B9E4 /* Create Episode */ = {
 			isa = PBXGroup;
 			children = (
+				6B5C18202197202700B5F880 /* Model */,
 				6B5C1803219510E700B5F880 /* View */,
 				6B5C1802219510D200B5F880 /* Controller */,
 			);
@@ -428,6 +434,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		6B5C18202197202700B5F880 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6B5C181E2197202100B5F880 /* UploadImageData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E0C7E51DEA1BBFE602BEC2CD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,6 +579,7 @@
 				6B59B632218C5F2800D9CF9B /* BaseTableCell.swift in Sources */,
 				6B3AAB35218FA1040018B9E4 /* CreateEpisodeController.swift in Sources */,
 				6B59B5FA2189E0B700D9CF9B /* UIView+Anchors.swift in Sources */,
+				6B5C181F2197202100B5F880 /* UploadImageData.swift in Sources */,
 				6B5C17C021923C3100B5F880 /* CommentInputAccessoryView.swift in Sources */,
 				6B5C17A22190D0BA00B5F880 /* EpisodeDetails.swift in Sources */,
 				6B3AAB20218EFFFF0018B9E4 /* ShowDetailsViewController.swift in Sources */,
@@ -595,6 +610,7 @@
 				6B59B61E218B993900D9CF9B /* PrgoressIndicator.swift in Sources */,
 				6B5C180921951AE300B5F880 /* HomeShowsViewController+Delegat.swift in Sources */,
 				6B59B61C218B97E100D9CF9B /* ServiceApi.swift in Sources */,
+				6B5C18222197710600B5F880 /* ShowDetialsEpisodesTableController+TableView.swift in Sources */,
 				6B3AAB31218F5A850018B9E4 /* ShowEpisodesDetaills.swift in Sources */,
 				6B3AAB2F218F51A60018B9E4 /* ShowEpisodeDetialsCell.swift in Sources */,
 				6B5C17BC2190FBB800B5F880 /* BaseCell.swift in Sources */,

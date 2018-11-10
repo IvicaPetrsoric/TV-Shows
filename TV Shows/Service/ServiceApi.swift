@@ -72,7 +72,7 @@ class ServiceApi {
     func postData(parameters: Parameters, endpoint: Endpoint, completionHandler: @escaping  (ResponseStatus) -> ()) {
         let url = getUrl(endpoint: endpoint)
         
-        Alamofire.request(url,
+        sessionManager.request(url,
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
@@ -93,21 +93,39 @@ class ServiceApi {
         }
     }
 
-    func postImage(data: Data, fileName: String, completionHandler: @escaping (ResponseStatus) -> ()) {
+    func postImage(data: Data, completionHandler: @escaping (UploadImageData?, ResponseStatus) -> ()) {
         let url = getUrl(endpoint: .addImage)
         
         sessionManager.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(data, withName: "avatar", fileName: fileName, mimeType: "image/png")
+            multipartFormData.append(data, withName: "file", fileName: "image.jpg", mimeType: "image/jpg")
         }, to: url, method: .post) { (result) in
             switch result{
             case .success(let upload, _, _):
-                upload.responseJSON { response in
-                    completionHandler(.success)
+                upload.responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<UploadImageData>) in
+                    guard let uploadedImageData = response.result.value else {
+                        print("No image data")
+                        return completionHandler(nil, .error)
+                    }
+                    return completionHandler(uploadedImageData, .success)
                 }
             case .failure(let error):
                 print("Error in upload: \(error.localizedDescription)")
-                completionHandler(.error)
+                completionHandler(nil, .error)
             }
+        }
+    }
+    
+    func postAddEpisode(parameters: Parameters, endpoint: Endpoint, completionHandler: @escaping  (ShowEpisodesDetaills?, ResponseStatus) -> ()) {
+        let url = getUrl(endpoint: endpoint)
+        
+        sessionManager.request(url,
+                               method: .post,
+                               parameters: parameters,
+                               encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<ShowEpisodesDetaills>) in
+                guard let showEpisodeDetails = response.result.value else { return completionHandler(nil, .error) }
+                return completionHandler(showEpisodeDetails, .success)
         }
     }
     

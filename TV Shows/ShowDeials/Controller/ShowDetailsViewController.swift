@@ -86,7 +86,7 @@ class ShowDetailsViewController: LightStatusBarStyle {
         guard let id = showDetialsId else { return }
         let createEpisode = CreateEpisodeController()
         createEpisode.showId = id
-        createEpisode.delegate = self
+        createEpisode.delegate = showDetialsEpisodesTableController
         let navVC = UINavigationController(rootViewController: createEpisode)
         navigationController?.present(navVC, animated: true, completion: nil)
     }

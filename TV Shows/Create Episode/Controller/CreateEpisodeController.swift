@@ -1,7 +1,7 @@
 import UIKit
 
 protocol CreateEpisodeDelegate: class {
-    func updateShowDetailsTable()
+    func updateShowDetailsTable(newEpisode: ShowEpisodesDetaills)
 }
 
 class CreateEpisodeController: UIViewController {
@@ -51,6 +51,7 @@ class CreateEpisodeController: UIViewController {
     
     typealias seasonAndEpisodeType = (season: String, episode: String)
     var seasonAndEpisode: seasonAndEpisodeType = (season: "8", episode: "6")
+    let progressIndicator = PrgoressIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +72,7 @@ class CreateEpisodeController: UIViewController {
     fileprivate func setupViews() {
         view.addSubview(uploadImageView)
         view.addSubview(seasonAndEpisodeLabel)
+        view.addSubview(progressIndicator)
         
         uploadImageView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,
                                padding: .init(top: 50, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 60))
@@ -80,10 +82,13 @@ class CreateEpisodeController: UIViewController {
         stackView.distribution = .fillEqually
 
         view.addSubview(stackView)
-        stackView.anchor(top: uploadImageView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 16, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 192))
+        stackView.anchor(top: uploadImageView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,
+                         padding: .init(top: 16, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 192))
         
         seasonAndEpisodeLabel.anchor(top: seasonAndEpisodeTextField.myTextField.topAnchor, leading: seasonAndEpisodeTextField.myTextField.leadingAnchor,
                                      bottom: seasonAndEpisodeTextField.myTextField.bottomAnchor, trailing: seasonAndEpisodeTextField.myTextField.trailingAnchor)
+        
+        progressIndicator.fillSuperview()
     }
     
     @objc func handleCancel() {
@@ -91,7 +96,7 @@ class CreateEpisodeController: UIViewController {
     }
     
     @objc func handleAddEpisode() {
-        prepareForUploadEpisodeData()
+        uploadImageData()
     }
 
 }

@@ -28,7 +28,6 @@ class UploadImageView: BaseView {
     }()
     
     var currentImage: UIImage?
-    var currentImageUrl: String?
     
     override func setupViews() {
         addSubview(cameraButton)

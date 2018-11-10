@@ -31,19 +31,17 @@ extension UploadImageView: UIImagePickerControllerDelegate, UINavigationControll
             currentImage = originalImage
         }
         
-        if let imageURL = info[UIImagePickerController.InfoKey.referenceURL] as? URL {
-            currentImageUrl = imageURL.absoluteString
-        }
-        
         updateViews()
         roundCornerPickImage()
         currentVC?.dismiss(animated: true, completion: nil)
     }
     
     fileprivate func updateViews() {
-        addImageButton.alpha = 1
-        cameraButton.alpha = 0
-        uploadImageLabel.alpha = 0
+        if cameraButton.alpha == 1 {
+            addImageButton.alpha = 1
+            cameraButton.alpha = 0
+            uploadImageLabel.alpha = 0
+        }
     }
     
 }

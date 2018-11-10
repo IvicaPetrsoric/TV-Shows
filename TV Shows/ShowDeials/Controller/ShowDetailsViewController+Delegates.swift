@@ -22,11 +22,4 @@ extension ShowDetailsViewController: PushNewVCDelegate {
     
 }
 
-extension ShowDetailsViewController: CreateEpisodeDelegate {
-    
-    func updateShowDetailsTable() {
-        guard let id = showDetialsId else { return }
-        showDetialsEpisodesTableController.showId = id
-    }
-}
 
