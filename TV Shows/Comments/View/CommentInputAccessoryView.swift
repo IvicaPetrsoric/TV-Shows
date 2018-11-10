@@ -24,7 +24,7 @@ class CommentInputAccessoryView: BaseView {
     lazy var postButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Post", for: .normal)
-        button.setTitleColor(.color(key: .buttonLogInEnabled), for: .normal)
+        button.setTitleColor(.color(key: .pinkEnabled), for: .normal)
         button.addTarget(self, action: #selector(handlePost), for: .touchUpInside)
         return button
     }()

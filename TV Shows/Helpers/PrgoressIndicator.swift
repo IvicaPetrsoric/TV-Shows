@@ -4,7 +4,7 @@ class PrgoressIndicator: BaseView {
     
     let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-        indicator.color = UIColor.color(key: .buttonLogInEnabled)
+        indicator.color = UIColor.color(key: .pinkEnabled)
         return indicator
     }()
     

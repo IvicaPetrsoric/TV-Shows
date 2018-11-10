@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("LOG IN", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .color(key: .buttonLogInDisabled)
+        button.backgroundColor = .color(key: .pinkDisabled)
         button.layer.cornerRadius = 6
         button.clipsToBounds = true
         button.isEnabled = false
@@ -112,7 +112,7 @@ class LoginViewController: UIViewController {
     }
     
     func updateLoginButtonColor() {
-        loginButton.backgroundColor = (!userPassword.isEmpty && !userEmail.isEmpty) ? .color(key: .buttonLogInEnabled) : .color(key: .buttonLogInDisabled)
+        loginButton.backgroundColor = (!userPassword.isEmpty && !userEmail.isEmpty) ? .color(key: .pinkEnabled) : .color(key: .pinkDisabled)
         loginButton.isEnabled =  (!userPassword.isEmpty && !userEmail.isEmpty) ? true : false
     }
     

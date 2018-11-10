@@ -14,7 +14,7 @@ class UploadImageView: BaseView {
     let uploadImageLabel: UILabel = {
         let label = UILabel()
         label.text = "Upload photo"
-        label.textColor = .color(key: .buttonLogInEnabled)
+        label.textColor = .color(key: .pinkEnabled)
         label.textAlignment = .center
         return label
     }()
@@ -46,7 +46,7 @@ class UploadImageView: BaseView {
     
     func roundCornerPickImage() {
         addImageButton.layer.cornerRadius = 29
-        addImageButton.layer.borderColor = UIColor.color(key: .buttonLogInEnabled).cgColor
+        addImageButton.layer.borderColor = UIColor.color(key: .pinkEnabled).cgColor
         addImageButton.layer.borderWidth = 2
         addImageButton.clipsToBounds = true
     }

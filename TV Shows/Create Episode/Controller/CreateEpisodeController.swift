@@ -19,7 +19,7 @@ class CreateEpisodeController: UIViewController {
         let textField = CustomTextFieldView()
         textField.textFieldMode = .email
         textField.placeholderLabel.text = "Episode title"
-        textField.myTextField.textColor = .color(key: .buttonLogInEnabled)
+        textField.myTextField.textColor = .color(key: .pinkEnabled)
         return textField
     }()
     
@@ -28,7 +28,7 @@ class CreateEpisodeController: UIViewController {
         textField.textFieldMode = .email
         textField.placeholderLabel.text = "Season & Episode"
         textField.delegate = self
-        textField.myTextField.textColor = .color(key: .buttonLogInEnabled)
+        textField.myTextField.textColor = .color(key: .pinkEnabled)
         textField.updateTextField(text: "8 & 6")
         return textField
     }()
@@ -36,7 +36,7 @@ class CreateEpisodeController: UIViewController {
     lazy var seasonAndEpisodeLabel: UILabel = {
         let label = UILabel()
         label.text = "Season 8, Ep 6"
-        label.textColor = .color(key: .buttonLogInEnabled)
+        label.textColor = .color(key: .pinkEnabled)
         label.textAlignment = .right
         return label
     }()
@@ -45,7 +45,7 @@ class CreateEpisodeController: UIViewController {
         let textField = CustomTextFieldView()
         textField.textFieldMode = .email
         textField.placeholderLabel.text = "Episode description"
-        textField.myTextField.textColor = .color(key: .buttonLogInEnabled)
+        textField.myTextField.textColor = .color(key: .pinkEnabled)
         return textField
     }()
     
@@ -64,9 +64,9 @@ class CreateEpisodeController: UIViewController {
     fileprivate func setupNavBar() {
         navigationItem.title = "Add episode"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
-        navigationItem.leftBarButtonItem?.tintColor = .color(key: .buttonLogInEnabled)
+        navigationItem.leftBarButtonItem?.tintColor = .color(key: .pinkEnabled)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(handleAddEpisode))
-        navigationItem.rightBarButtonItem?.tintColor = .color(key: .buttonLogInEnabled)
+        navigationItem.rightBarButtonItem?.tintColor = .color(key: .pinkEnabled)
     }
     
     fileprivate func setupViews() {

@@ -9,7 +9,7 @@ class EpisodeDetailsView: ShowHeaderDetialsView {
             
             let attributedText = NSMutableAttributedString(string: "\(title)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24)])
             attributedText.append(NSAttributedString(string: "S\(season) Ep\(episode)",
-                attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.color(key: .buttonLogInEnabled)]))
+                attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.color(key: .pinkEnabled)]))
             titleLabel.attributedText = attributedText
             
             descriptionLabel.text = episodeDetials?.description

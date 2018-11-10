@@ -52,7 +52,7 @@ class CustomTextFieldView: BaseView {
         toolBar.sizeToFit()
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(handleDismisKeyboard))
-        doneButton.tintColor = .color(key: .buttonLogInEnabled)
+        doneButton.tintColor = .color(key: .pinkEnabled)
         toolBar.setItems([flexibleSpace, doneButton], animated: true)
         return toolBar
     }()

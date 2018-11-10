@@ -5,7 +5,7 @@ class ShowEpisodeDetialsCell: BaseTableCell {
     var showEpisodeDetails: ShowEpisodesDetaills? {
         didSet {
             guard let season = showEpisodeDetails?.season, let episode = showEpisodeDetails?.episodeNumber, let title = showEpisodeDetails?.title else { return }
-            let attributedText = NSMutableAttributedString(string: "S\(season) E\(episode)  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.color(key: .buttonLogInEnabled)])
+            let attributedText = NSMutableAttributedString(string: "S\(season) E\(episode)  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.color(key: .pinkEnabled)])
             attributedText.append(NSAttributedString(string: " \(title)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
             episodeDetilasLabel.attributedText = attributedText
         }

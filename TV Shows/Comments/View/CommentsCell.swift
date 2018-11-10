@@ -33,7 +33,7 @@ class CommentsCell: BaseCell {
     let userNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Test"
-        label.textColor = .color(key: .buttonLogInEnabled)
+        label.textColor = .color(key: .pinkEnabled)
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()

@@ -2,17 +2,17 @@ import UIKit
 
 extension UIColor {
     
-    enum ColorKeys: String {
-        case buttonLogInEnabled
-        case buttonLogInDisabled
+    enum Key: String {
+        case pinkEnabled
+        case pinkDisabled
     }
     
-    static func color(key: ColorKeys) -> UIColor {
+    static func color(key: Key) -> UIColor {
         switch key {
-        case .buttonLogInEnabled:
+        case .pinkEnabled:
             return UIColor.rgb(red: 255, green: 117, blue: 140)
             
-        case .buttonLogInDisabled:
+        case .pinkDisabled:
             return UIColor.rgb(red: 255, green: 204, blue: 213)
             
         }
