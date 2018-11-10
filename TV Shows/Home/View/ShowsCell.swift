@@ -8,7 +8,7 @@ class ShowsCell: BaseTableCell {
             
             guard let imageUrl = myShow?.imageUrl else { return }
             
-            ServiceApi.shared.getShowsImage(byUrl: imageUrl) { (image) in
+            ServiceApi.shared.getImage(id: imageUrl) { (image) in
                 if let image = image {
                     self.showsImageView.image = image
                     self.activityIndicator.stopAnimating()

@@ -1,34 +1,9 @@
 import Foundation
 import Alamofire
 
-//import Foundation
-import CodableAlamofire
-
-struct UserToken: Decodable {
-    
-    let token: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case token
-    }
-}
-
-
 class ServiceApi {
     
     static let shared = ServiceApi()
-    
-    fileprivate let baseUrl = "https://api.infinum.academy"
-    
-    enum ResponseStatus {
-        case success
-        case error
-    }
-    
-    //    email: ios.team@infinum.hr
-    //    password: infinum1
-    
-//    let sessionManager = SessionManager()
     
     var sessionManager: SessionManager {
         let manager = Alamofire.SessionManager.default
@@ -36,179 +11,90 @@ class ServiceApi {
         return manager
     }
     
-    func login(email: String, password: String, completionHandler: @escaping (ResponseStatus) -> ()) {
-        var url = baseUrl + "/api/users"
-        
-        let parameters: Parameters = [
-            "email": email,
-            "password": password
-        ]
-        
-        Alamofire.request(url,
-                          method: .post,
-                          parameters: parameters,
-                          encoding: JSONEncoding.default)
-            .validate()
-            .responseJSON { response in
-                switch response.result {
-                case .success:
-                    print("Logiran")
-                    //                    completionHandler(.success)
-                    
-                case .failure:
-                    print("error login")
-                    //                    completionHandler(.error)
-                }
-        }
-        
-        url = baseUrl + "/api/users/sessions"
-        
-        
-        
-        Alamofire.request(url,
-                          method: .post,
-                          parameters: parameters,
-                          encoding: JSONEncoding.default)
-            //                          headers: headers)
-            .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<UserToken>) in
-                guard let myToken = response.result.value else {
-                    return completionHandler(.error)
-                    
-                }
-                self.token = myToken.token
-                print("myToken \(myToken)")
-                
-                self.sessionManager.adapter = AccessTokenAdapter(accessToken: self.token)
-                
-                
-                //                let sessionManager = SessionManager()
-                //                sessionManager.adapter = AccessTokenAdapter(accessToken: self.token)
-                //
-                //                print(sessionManager.request(self.baseUrl))
-                
-                
-                return completionHandler(.success)
-                
-                
-                
-        }
-        
-        
+    enum ResponseStatus {
+        case success
+        case error
     }
-    
-    fileprivate var token = ""
-    
-    func getShows(completionHandler: @escaping ([Shows]?, ResponseStatus) -> ()) {
-        let url = baseUrl + "/api/shows"
-        
-        sessionManager.request(url,
-                               method: .get,
-                               encoding: JSONEncoding.default)
-            .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<[Shows]>) in
-                guard let myShows = response.result.value else { return completionHandler(nil, .error) }
-                return completionHandler(myShows, .success)
-        }
-    }
-    
-    func getShowsImage(byUrl: String, completionHandler: @escaping (UIImage?) -> ()) {
-        let imageUrl = baseUrl + byUrl
-        
-        sessionManager.request(imageUrl).responseData { (response) in
-            if let error = response.error {
-                print("Failed to fetch ShowsImage ", error.localizedDescription)
-                return completionHandler(nil)
-            }
-            
-            guard let imagedata = response.data else { return completionHandler(nil) }
-            
-            let image = UIImage(data: imagedata)
-            return completionHandler(image)
-        }
-    }
-    
-    func getShowDescription(id: String, completionHandler: @escaping (ShowDetails?, ResponseStatus) -> ()) {
-        let url = baseUrl + "/api/shows/\(id)"
-        
-        sessionManager.request(url,
-                               method: .get,
-                               encoding: JSONEncoding.default)
-            .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<ShowDetails>) in
-                guard let showDetials = response.result.value else { return completionHandler(nil, .error) }
-                return completionHandler(showDetials, .success)
-        }
-    }
-    
-    func getShowEpisodesDescription(id: String, completionHandler: @escaping ([ShowEpisodesDetaills]?, ResponseStatus) -> ()) {
-        let url = baseUrl + "/api/shows/\(id)/episodes"
-        
-        sessionManager.request(url,
-                               method: .get,
-                               encoding: JSONEncoding.default)
-            .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<[ShowEpisodesDetaills]>) in
-                guard let showEpisodesDetials = response.result.value else { return completionHandler(nil, .error) }
-                return completionHandler(showEpisodesDetials, .success)
-        }
-    }
-    
-    func getEpisodeDetails(id: String, completionHandler: @escaping (EpisodeDetails?, ResponseStatus) -> ()) {
-        let url = baseUrl + "/api/episodes/\(id)"
-//        self.sessionManager.session.configuration.timeoutIntervalForRequest = 10
-        self.sessionManager.session.configuration.timeoutIntervalForResource = 5
 
-        sessionManager.request(url,
-                               method: .get,
-                               encoding: JSONEncoding.default)
-            .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<EpisodeDetails>) in
-                guard let episodesDetials = response.result.value else { return completionHandler(nil, .error) }
-                return completionHandler(episodesDetials, .success)
+    enum Endpoint {
+        case show
+        case showDescription
+        case showEpisodesDescription
+        case episodeDetails
+        case episodeDetailsComments
+        case image
+        case login
+        case token
+        case comment
+        case addEpisode
+        case addImage
+    }
+    
+    fileprivate func getUrl(id: String = "", endpoint: Endpoint) -> String {
+        let baseUrl = "https://api.infinum.academy"
+        
+        switch endpoint {
+        case .show:
+            return baseUrl + "/api/shows"
+            
+        case .image:
+            return baseUrl + id
+            
+        case .showDescription:
+            return  baseUrl + "/api/shows/\(id)"
+            
+        case .showEpisodesDescription:
+            return baseUrl + "/api/shows/\(id)/episodes"
+            
+        case .episodeDetails:
+            return baseUrl + "/api/episodes/\(id)"
+            
+        case .episodeDetailsComments:
+            return baseUrl + "/api/episodes/\(id)/comments"
+            
+        case .login:
+            return baseUrl + "/api/users"
+            
+        case .token:
+            return baseUrl + "/api/users/sessions"
+            
+        case .comment:
+            return baseUrl + "/api/comments"
+            
+        case .addImage:
+            return baseUrl + "/api/media"
+            
+        case .addEpisode:
+            return baseUrl + "/api/episodes"
         }
     }
     
-    func getEpisodeDetailsComments(id: String, completionHandler: @escaping ([Comment]?, ResponseStatus) -> ()) {
-        let url = baseUrl + "/api/episodes/\(id)/comments"
+    func postData(parameters: Parameters, endpoint: Endpoint, completionHandler: @escaping  (ResponseStatus) -> ()) {
+        let url = getUrl(endpoint: endpoint)
         
-        sessionManager.request(url,
-                               method: .get,
-                               encoding: JSONEncoding.default)
-            .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<[Comment]>) in
-                guard let episodeComments = response.result.value else { return completionHandler(nil, .error) }
-                return completionHandler(episodeComments, .success)
-        }
-    }
-    
-    func postEpisodeDetailsComment(id: String, text: String, completionHandler: @escaping  (ResponseStatus) -> ()) {
-        let url = baseUrl + "/api/comments"
-        
-        let parameters: Parameters = [
-            "text": text,
-            "episodeId": id
-        ]
-        
-        sessionManager.request(url,
-                               method: .post,
-                               parameters: parameters,
-                               encoding: JSONEncoding.default)
+        Alamofire.request(url,
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default)
             .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success:
-                    completionHandler(.success)
-                    
+                    if endpoint == .login {
+                        self.getToken(parameters: parameters, endpoint: .token, completionHandler: completionHandler)
+                    } else {
+                        completionHandler(.success)
+                    }
+ 
                 case .failure(let error):
                     print(error.localizedDescription)
                     completionHandler(.error)
                 }
         }
     }
-    
+
     func postImage(data: Data, fileName: String, completionHandler: @escaping (ResponseStatus) -> ()) {
-        let url = baseUrl + "/api/media"
+        let url = getUrl(endpoint: .addImage)
         
         sessionManager.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(data, withName: "avatar", fileName: fileName, mimeType: "image/png")
@@ -225,51 +111,52 @@ class ServiceApi {
         }
     }
     
-    func postCreateEpisode(details: ShowEpisodesDetaills, completionHandler: @escaping (ResponseStatus) -> ()) {
-        let url = baseUrl + "/api/episodes"
-        
-        let parameters: Parameters = [
-            "showId": details.id,
-            "mediaId": details.imageUrl,
-            "title": details.title,
-            "description": details.description,
-            "episodeNumber": details.episodeNumber,
-            "season": details.season
-        ]
+    fileprivate func getToken(parameters: Parameters , endpoint: Endpoint, completionHandler: @escaping (ResponseStatus) -> ()) {
+        let url = getUrl(endpoint: endpoint)
         
         sessionManager.request(url,
                                method: .post,
                                parameters: parameters,
                                encoding: JSONEncoding.default)
             .validate()
-            .responseJSON { response in
-                switch response.result {
-                case .success:
-                    completionHandler(.success)
-                    
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    completionHandler(.error)
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<UserToken>) in
+                guard let myToken = response.result.value else {
+                    return completionHandler(.error)
                 }
+                
+                self.sessionManager.adapter = AccessTokenAdapter(accessToken: myToken.token)
+                return completionHandler(.success)
         }
     }
-}
-
-class AccessTokenAdapter: RequestAdapter {
-    private let accessToken: String
     
-    init(accessToken: String) {
-        self.accessToken = accessToken
-    }
-    
-    func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
-        var urlRequest = urlRequest
+    func getData<T: Decodable>(id: String = "", endpoint: Endpoint, type: T.Type, completionHandler: @escaping (T?, ResponseStatus) -> ()) {
+        let url = getUrl(id: id, endpoint: endpoint)
         
-        if let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix("https://api.infinum.academy") {
-            urlRequest.setValue(accessToken, forHTTPHeaderField: "Authorization")
+        sessionManager.request(url,
+                               method: .get,
+                               encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<T>) in
+                guard let showDetials = response.result.value else { return completionHandler(nil, .error) }
+                return completionHandler(showDetials, .success)
         }
-        
-        return urlRequest
     }
-}
+    
+    func getImage(id: String, completionHandler: @escaping (UIImage?) -> ()) {
+        let url = getUrl(id: id, endpoint: .image)
 
+        sessionManager.request(url).responseData { (response) in
+            if let error = response.error {
+                print("Failed to get image ", error.localizedDescription)
+                return completionHandler(nil)
+            }
+            
+            guard let imagedata = response.data else { return completionHandler(nil) }
+            
+            let image = UIImage(data: imagedata)
+            return completionHandler(image)
+        }
+    }
+    
+    
+}

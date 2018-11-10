@@ -13,7 +13,7 @@ class ShowHeaderDetialsView: BaseView {
             
             guard let imageUrl = showDetilas?.imageUrl else { return }
             
-            ServiceApi.shared.getShowsImage(byUrl: imageUrl) { (image) in
+            ServiceApi.shared.getImage(id: imageUrl) { (image) in
                 if let image = image {
                     self.fetchedImage = image
                     self.setupUI()

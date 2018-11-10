@@ -57,6 +57,8 @@
 		6B5C180121950E6F00B5F880 /* UploadImageView+ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C180021950E6F00B5F880 /* UploadImageView+ImagePicker.swift */; };
 		6B5C18052195116000B5F880 /* ShowDetailsViewController+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C18042195116000B5F880 /* ShowDetailsViewController+Delegates.swift */; };
 		6B5C180921951AE300B5F880 /* HomeShowsViewController+Delegat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C180821951AE300B5F880 /* HomeShowsViewController+Delegat.swift */; };
+		6B5C180B21951D5100B5F880 /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C180A21951D5100B5F880 /* UserToken.swift */; };
+		6B5C180D21951FD600B5F880 /* AccessTokenAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C180C21951FD600B5F880 /* AccessTokenAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +114,8 @@
 		6B5C180021950E6F00B5F880 /* UploadImageView+ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadImageView+ImagePicker.swift"; sourceTree = "<group>"; };
 		6B5C18042195116000B5F880 /* ShowDetailsViewController+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowDetailsViewController+Delegates.swift"; sourceTree = "<group>"; };
 		6B5C180821951AE300B5F880 /* HomeShowsViewController+Delegat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeShowsViewController+Delegat.swift"; sourceTree = "<group>"; };
+		6B5C180A21951D5100B5F880 /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
+		6B5C180C21951FD600B5F880 /* AccessTokenAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenAdapter.swift; sourceTree = "<group>"; };
 		D3E3C129C6FAD8FACBFFD6E9 /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Pods/Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
 		E41EEA0EB812FD14530523D6 /* Pods_TV_Shows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TV_Shows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -277,6 +281,8 @@
 			isa = PBXGroup;
 			children = (
 				6B59B61B218B97E100D9CF9B /* ServiceApi.swift */,
+				6B5C180C21951FD600B5F880 /* AccessTokenAdapter.swift */,
+				6B5C180A21951D5100B5F880 /* UserToken.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -580,6 +586,7 @@
 				6B5C179F2190CF8E00B5F880 /* EpisodeDetailsViewController.swift in Sources */,
 				6B5C17DE21937BE600B5F880 /* CommentsController+CollectionView.swift in Sources */,
 				6B3AAB38218FA2930018B9E4 /* UploadImageView.swift in Sources */,
+				6B5C180D21951FD600B5F880 /* AccessTokenAdapter.swift in Sources */,
 				6B59B630218C5EEB00D9CF9B /* ShowsCell.swift in Sources */,
 				6B59B607218A34B100D9CF9B /* BaseView.swift in Sources */,
 				6B59B61E218B993900D9CF9B /* PrgoressIndicator.swift in Sources */,
@@ -589,6 +596,7 @@
 				6B3AAB2F218F51A60018B9E4 /* ShowEpisodeDetialsCell.swift in Sources */,
 				6B5C17BC2190FBB800B5F880 /* BaseCell.swift in Sources */,
 				6B5C180121950E6F00B5F880 /* UploadImageView+ImagePicker.swift in Sources */,
+				6B5C180B21951D5100B5F880 /* UserToken.swift in Sources */,
 				6B5C17BA2190FB8B00B5F880 /* CommentsCell.swift in Sources */,
 				6B59B602218A281A00D9CF9B /* UIColor.swift in Sources */,
 				6B59B605218A348300D9CF9B /* CustomTextFieldView.swift in Sources */,

@@ -7,7 +7,7 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
             guard let id = self.episodeId else { return }
             progressIndicator.animate(show: true)
 
-            ServiceApi.shared.getEpisodeDetailsComments(id: id) { [weak self] (comments, response) in
+            ServiceApi.shared.getData(id: id, endpoint: .episodeDetailsComments, type: [Comment].self) { [weak self] (comments, response) in
                 self?.progressIndicator.animate(show: false)
 
                 if response == .error {

@@ -22,7 +22,6 @@ class HomeShowsViewController: UIViewController {
         view.backgroundColor = .white
         
         presentVC(byId: "")
-        setupViews()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +43,7 @@ class HomeShowsViewController: UIViewController {
     func fetchUserVideos() {
         progressIndicator.animate(show: true)
         
-        ServiceApi.shared.getShows() { (shows, error) in
+        ServiceApi.shared.getData(endpoint: .show, type: [Shows].self) { (shows, error) in
             self.progressIndicator.animate(show: false)
             
             if error == .error {

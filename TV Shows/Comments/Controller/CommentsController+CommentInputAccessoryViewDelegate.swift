@@ -1,4 +1,5 @@
 import Foundation
+import Alamofire
 
 extension CommentsController: CommentInputAccessoryViewDelegate {
     
@@ -6,7 +7,12 @@ extension CommentsController: CommentInputAccessoryViewDelegate {
         guard let id = episodeId else { return }
         progressIndicator.animate(show: true)
         
-        ServiceApi.shared.postEpisodeDetailsComment(id: id, text: comment) { [weak self] (response) in
+        let parameters: Parameters = [
+            "text": comment,
+            "episodeId": id
+        ]
+        
+        ServiceApi.shared.postData(parameters: parameters, endpoint: .comment) { [weak self] (response) in
             self?.progressIndicator.animate(show: false)
             
             if response == .error {
@@ -17,4 +23,5 @@ extension CommentsController: CommentInputAccessoryViewDelegate {
             self?.addNewComment(id: id, comment: comment)
         }
     }
+    
 }

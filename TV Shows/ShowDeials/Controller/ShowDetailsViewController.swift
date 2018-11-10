@@ -7,7 +7,7 @@ class ShowDetailsViewController: UIViewController {
             guard let id = showDetialsId else { return }
             progressIndicator.animate(show: true)
 
-            ServiceApi.shared.getShowDescription(id: id) { [weak self] (details, response) in
+            ServiceApi.shared.getData(id: id, endpoint: .showDescription, type: ShowDetails.self) { [weak self] (details, response) in
                 self?.progressIndicator.animate(show: false)
 
                 if response == .error {

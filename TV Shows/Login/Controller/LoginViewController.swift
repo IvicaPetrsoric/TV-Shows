@@ -1,4 +1,5 @@
 import UIKit
+import Alamofire
 
 protocol LoginViewDelegate: class {
     func userLoged()
@@ -93,7 +94,11 @@ class LoginViewController: UIViewController {
     }
     
     fileprivate func handleServiceLogIn() {
-        ServiceApi.shared.login(email: userEmail, password: userPassword) { [weak self] (response) in
+        let parameters: Parameters = [
+            "email": userEmail,
+            "password": userPassword
+        ]
+        ServiceApi.shared.postData(parameters: parameters, endpoint: .login) { [weak self] (response) in
             self?.progressIndicator.animate(show: false)
             
             if response == .error {

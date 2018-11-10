@@ -24,6 +24,7 @@ extension HomeShowsViewController: PresentNewVCDelegate {
 extension HomeShowsViewController: LoginViewDelegate {
     
     func userLoged() {
+        setupViews()
         fetchUserVideos()
     }
 }

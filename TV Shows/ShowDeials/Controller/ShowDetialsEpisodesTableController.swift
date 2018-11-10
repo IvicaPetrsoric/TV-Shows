@@ -7,7 +7,7 @@ class ShowDetialsEpisodesTableController: UITableViewController {
             guard let id = showId else { return }
             progressIndicator.animate(show: true)
             
-            ServiceApi.shared.getShowEpisodesDescription(id: id) { [weak self] (showEpisodes, response) in
+            ServiceApi.shared.getData(id: id, endpoint: .showEpisodesDescription, type: [ShowEpisodesDetaills].self) { [weak self] (showEpisodes, response) in
                 self?.progressIndicator.animate(show: false)
                 
                 if response == .error {

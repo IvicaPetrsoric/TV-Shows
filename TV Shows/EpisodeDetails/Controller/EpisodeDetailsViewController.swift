@@ -7,7 +7,7 @@ class EpisodeDetailsViewController: UIViewController {
             guard let id = episodeId else { return }
             progressIndicator.animate(show: true)
             
-            ServiceApi.shared.getEpisodeDetails(id: id) { [weak self] (episodeDetails, response) in
+            ServiceApi.shared.getData(id: id, endpoint: .episodeDetails, type: EpisodeDetails.self) { [weak self] (episodeDetails, response) in
                 if response == .error {
                     self?.progressIndicator.animate(show: false)
                     self?.showAllert(message: .errorFetchingEpisodeDetials)

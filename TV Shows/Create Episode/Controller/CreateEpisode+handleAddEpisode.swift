@@ -1,4 +1,5 @@
 import UIKit
+import Alamofire
 
 extension CreateEpisodeController {
     
@@ -16,13 +17,23 @@ extension CreateEpisodeController {
             
             guard let showEpisodeDetails = self?.validateEpisodeDetailsData(withImageUrl: imageUrl) else { return }
             
-            ServiceApi.shared.postCreateEpisode(details: showEpisodeDetails, completionHandler: { [weak self] (response) in
+            let parameters: Parameters = [
+                "showId": showEpisodeDetails.id,
+                "mediaId": showEpisodeDetails.imageUrl,
+                "title": showEpisodeDetails.title,
+                "description": showEpisodeDetails.description,
+                "episodeNumber": showEpisodeDetails.episodeNumber,
+                "season": showEpisodeDetails.season
+            ]
+            
+            ServiceApi.shared.postData(parameters: parameters, endpoint: .addEpisode, completionHandler: { [weak self] (response) in
                 if response == .error {
                     self?.showAllert(message: .errorCreateEpisode)
                     return
                 }
                 
                 self?.successfullyCreatedEpisode()
+                
             })
         }
     }

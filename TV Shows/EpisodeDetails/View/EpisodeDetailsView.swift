@@ -16,7 +16,7 @@ class EpisodeDetailsView: ShowHeaderDetialsView {
             
             guard let imageUrl = episodeDetials?.imageUrl else { return }
             
-            ServiceApi.shared.getShowsImage(byUrl: imageUrl) { (image) in
+            ServiceApi.shared.getImage(id: imageUrl) { (image) in
                 if let image = image {
                     super.fetchedImage = image
                 }
