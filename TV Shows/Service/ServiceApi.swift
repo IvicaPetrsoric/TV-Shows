@@ -4,6 +4,7 @@ import Alamofire
 class ServiceApi {
     
     static let shared = ServiceApi()
+    let imageCashing = ImageCashing()
     
     var sessionManager: SessionManager {
         let manager = Alamofire.SessionManager.default
@@ -162,19 +163,25 @@ class ServiceApi {
     
     func getImage(id: String, completionHandler: @escaping (UIImage?) -> ()) {
         let url = getUrl(id: id, endpoint: .image)
-
-        sessionManager.request(url).responseData { (response) in
-            if let error = response.error {
-                print("Failed to get image ", error.localizedDescription)
-                return completionHandler(nil)
+        
+        imageCashing.loadImage(url: url) { [weak self] (cashedImage) in
+            if let cashedImage = cashedImage {
+                return completionHandler(cashedImage)
+            } else {
+                self?.sessionManager.request(url).responseData { (response) in
+                    if let error = response.error {
+                        print("Failed to get image ", error.localizedDescription)
+                        return completionHandler(nil)
+                    }
+                    
+                    guard let imagedata = response.data, let image = UIImage(data: imagedata) else { return completionHandler(nil) }
+                    self?.imageCashing.saveImage(image: image, url: url)
+                    
+                    return completionHandler(image)
+                }
             }
-            
-            guard let imagedata = response.data else { return completionHandler(nil) }
-            
-            let image = UIImage(data: imagedata)
-            return completionHandler(image)
         }
+
     }
-    
     
 }
