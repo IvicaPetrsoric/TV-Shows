@@ -23,11 +23,13 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Need your images</string>
+	<string>TV Show needs access to photo library</string>
 	<key>NSCameraUsageDescription</key>
-	<string>This app will use camera</string>
+	<string>TV Show needs access to your camera</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Please allow access to save photo in your photo library</string>
+	<string>TV Show needs access to save photo in your photo library</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

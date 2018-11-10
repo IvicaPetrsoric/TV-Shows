@@ -1,6 +1,6 @@
 import UIKit
 
-class ShowDetailsViewController: UIViewController {
+class ShowDetailsViewController: LightStatusBarStyle {
     
     var showDetialsId: String? {
         didSet {
@@ -60,7 +60,6 @@ class ShowDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupViews()
     }
     
@@ -70,14 +69,12 @@ class ShowDetailsViewController: UIViewController {
         scrollView.addSubview(headerDetialsView)
         scrollView.addSubview(backButton)
         
-        scrollView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: -UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0))
-
-//        // headerDetails height + Episdeos: title, 7cells, addButton
-//        let height: CGFloat = headerDetialsView.frame.height + 56 + 7 * 56
-//        scrollView.contentSize = CGSize(width: view.frame.width, height: 1032)
+        scrollView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor,
+                          padding: .init(top: -UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0))
         
         headerDetialsView.anchor(top: scrollView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
-        backButton.anchor(top: scrollView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 28, left: 16, bottom: 0, right: 0), size: .init(width: 32, height: 32))
+        backButton.anchor(top: scrollView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil,
+                          padding: .init(top: 28, left: 16, bottom: 0, right: 0), size: .init(width: 32, height: 32))
         progressIndicator.fillSuperview()
     }
     

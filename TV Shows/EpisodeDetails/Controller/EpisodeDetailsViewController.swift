@@ -1,6 +1,6 @@
 import UIKit
 
-class EpisodeDetailsViewController: UIViewController {
+class EpisodeDetailsViewController: LightStatusBarStyle {
     
     var episodeId: String? {
         didSet {
