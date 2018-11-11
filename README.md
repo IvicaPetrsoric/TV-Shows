@@ -1,4 +1,4 @@
-# TV-Shows
+# TV Shows
 
 Basic TV show app, allows you to track your favorite shows, explore their details and episodes, 
 created episodes or even comment on episode.
