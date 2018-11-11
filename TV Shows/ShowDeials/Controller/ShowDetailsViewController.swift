@@ -25,7 +25,6 @@ class ShowDetailsViewController: LightStatusBarStyle {
     let scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.backgroundColor = .white
-        sv.bounces = false
         sv.showsVerticalScrollIndicator = false
         return sv
     }()
@@ -61,6 +60,17 @@ class ShowDetailsViewController: LightStatusBarStyle {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+    
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        refreshControl.tintColor = UIColor.color(key: .pinkEnabled)
+        scrollView.refreshControl = refreshControl
+    }
+    
+    @objc func handleRefresh() {
+        scrollView.refreshControl?.endRefreshing()
+        let id = showDetialsId
+        showDetialsId = id
     }
     
     override func viewDidLayoutSubviews() {
