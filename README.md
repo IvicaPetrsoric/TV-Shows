@@ -26,19 +26,23 @@ If loged correctly, the ShowView will be shown which contains of a list followd 
  
  <img src="images/showDetails1.png" widht= 150 height = 300  hspace="0" />  <img src="images/showDetails2.png" widht= 150 height = 300  hspace="30" /> 
  
- ## AddEpisode
+ ## AddEpisodeView
  
  You can create episode for  specific show. For creating it's needed to fill the requed fields and upload image. For image upload you can pick between taking picture with camera or opening photo library.
  
  
  <img src="images/addEpisode1.png" widht= 150 height = 300  hspace="0" />  <img src="images/addEpisode2.png" widht= 150 height = 300  hspace="30" /> <img src="images/addEpisode3.png" widht= 150 height = 300  hspace="30" /> 
  
- ## EpisodeDetails
+ ## EpisodeDetailsView
  
  While clicking on specific show episode, you get navigated to view with more description of episode. Here you can press button for showing comments inside that epsode.
  
-  <img src="images/episodeDetails.png" widht= 150 height = 300  hspace="0" />  
+  <img src="images/episodeDetails.png" widht= 150 height = 300  hspace="0" /> 
   
-   <img src="images/addEpisode2.png" widht= 150 height = 300  hspace="30" /> <img src="images/addEpisode3.png" widht= 150 height = 300  hspace="30" /> 
+  ## EpisodeCommentsView
+  
+  Comments view for commenting with users in specific episode.
+  
+   <img src="images/episodeComments1.png" widht= 150 height = 300  hspace="30" /> <img src="images/episodeComments2.png" widht= 150 height = 300  hspace="30" /> 
   
  
